@@ -1,0 +1,74 @@
+import { Link } from "@inertiajs/react"
+import MenuDropDown from "@/Components/MenuDropDown"
+
+export default function AdminLayout({children}){
+    return (
+        <div className="dashboard flex flex-col h-screen" >
+                <div className='h-[4rem] bg-blue-950 flex items-center px-20 shadow-md'>
+                    <Link href="/">
+                        <h3 className='text-yellow-400 uppercase font-bold text-2xl '>
+                            Cinephile
+                        </h3>
+                    </Link>
+                </div>
+
+                <div className="flex-auto bg-slate-800">
+                    <div 
+                    id='dashboard-side-menu'
+                    className="bg-blue-950 fixed left-0 h-screen w-[13rem]"
+                    >  
+
+                        <div className="py-2">
+    
+                            <ul className="text-yellow-200 text-sm">
+                                <li className="">
+                                    <MenuDropDown 
+                                        menu = {[
+                                            {id:1,name: "All Movie", link : route('admin.movie')},
+                                            {id:2,name: "Create Movie", link : route('admin.movie.create')},
+                                            {id:3,name: "Edit Movie", link : route('admin.movie.edit.all')},
+                                        ]}
+                                        display={"Movies"}
+                                    />
+                                </li>
+
+                                <li className="">
+                                    <MenuDropDown 
+                                        menu = {[
+                                            {id:1,name: "New Schedule", link : route('admin.schedule.create')},
+                                            {id:2,name: "Schedules", link : route('admin.schedule')},
+                                            {id:3,name: "Edit Movie", link : route('admin.movie.edit.all')},
+                                        ]}
+                                        display={"Schedule"}
+                                    />
+                                </li>
+
+                                <li className="">
+                                    <MenuDropDown 
+                                        menu = {[
+                                            {id:1,name: "New Cinema", onClick : () => console.log('dd') },
+                                            {id:2,name: "New Room", onClick : () => console.log('dd') }
+
+                                        ]}
+                                        display={"Cinema"}
+                                    />
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div
+                     className="ms-[13rem] overflow-auto"
+                     style = {{
+                        height : 'calc(100vh - 4rem)',
+                     }}
+                     >
+                        {children}
+                    </div>
+
+                </div>
+
+        </div>
+    )
+}
