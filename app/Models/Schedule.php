@@ -53,4 +53,17 @@ class Schedule extends Model
         }); 
     }
 
+    public function scopeGetSchedule($query, $filter)
+    {
+        $query->where(function($query) use($filter){
+            $query->whereHas('date', function($query) use($filter) {
+                $query->where('date', $filter['date']);
+            })->whereHas('date', function($query) use($filter) {
+                $query->where('time', $filter['time']);
+            })->whereHas('room', function($query) use($filter){
+                $query->where('id', $filter['roomId']);
+            });
+        });
+    }
+
 }

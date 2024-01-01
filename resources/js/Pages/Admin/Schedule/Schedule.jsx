@@ -6,7 +6,6 @@ import { faEye,faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 const Schedule = ({schedules, dates, movies}) => {
 
-    console.log(schedules)
     return (
         <AdminLayout>
             <div className="px-4 py-4">

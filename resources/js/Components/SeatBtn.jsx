@@ -6,7 +6,13 @@ import { useState } from "react";
 const SeatBtn = ({selected, seat}) => {
 
     
-    const {setBooking, data} = useBooking();
+    const {
+        setBooking, 
+        data,
+        liveData,
+    } = useBooking();
+
+    // console.log(liveData.indexOf(seat))
 
     const [menuofBookBought, setMenuOfBookBought] = useState(null) 
 

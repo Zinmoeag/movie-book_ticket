@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { divide, isEqual } from "lodash"
+import { divide, initial, isEqual } from "lodash"
 import { router, useForm } from '@inertiajs/react'
 import { useDropMenu } from "../DropMenu/DropMenu";
 import Ticket from "@/Components/Ticket";
@@ -14,17 +14,25 @@ const useBookingState = () => {
         seat : [],
     };
 
-    // const {
-    //     showWithChild
-    // } = useDropMenu();
+    const initialLiveData = [];
+
+
+    const [liveData, setLiveData] = useState(initialLiveData);
 
     const { 
-        data, 
-        setData, 
-        post, 
-        processing,
-        reset,
-        errors } = useForm(initialData)
+    data, 
+    setData, 
+    post, 
+    processing,
+    reset,
+    errors } = useForm(initialData);
+
+    const setLiveBookingData = (key, seats) => {
+      setLiveData([
+        ...liveData,
+        ...seats,
+      ])
+    }
 
     const setBooking = (seat) => {
 
@@ -46,7 +54,6 @@ const useBookingState = () => {
             const updatedSeats = data.seat.filter(existedSeat => existedSeat.id !== seat.id);
 
             setData('seat', updatedSeats);
-
     }
 
     const submitBooking = (schedule) => {
@@ -83,7 +90,9 @@ const useBookingState = () => {
         setBooking,
         removeSeat,
         submitBooking,
-        buy 
+        buy,
+        liveData,
+        setLiveBookingData
     }
 }
 

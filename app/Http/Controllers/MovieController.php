@@ -54,27 +54,26 @@ class MovieController extends Controller
         $time  = request()->input('time');
         $roomId  = request()->input('roomId');
 
+        $schedule = Schedule::latest()->getSchedule(request(['date','time','roomId']))->first();
 
-                   //code...
-                   $DateTime  = $movie->dates()->getByTimeDate($time, $date, $roomId)->first();
-                   $scheduleSlug = $DateTime->pivot->slug;
-                   $datesRoom  = $movie->dates()->getByDateRoom($date)->get();
-           
-                   if($scheduleSlug){
-                       $movieSchedule = Schedule::where('slug', $scheduleSlug )->first();
-                       $movieSeat = new SeatsMaker($movieSchedule->seats);
-       
-                       return Inertia::render('ScheduleRoom',[
-                           'date' => [
-                               "current_date" => $date,
-                               'current_time' => $time,
-                           ],
-                           'movie' => $movie,
-                           "room" => $DateTime->room[0],
-                           'schedule' => $scheduleSlug,
-                           "scheduleSeat" => $movieSeat->make(),
-                       ]);
-                   }
+
+       if($schedule){
+           $movieSeat = new SeatsMaker($schedule->seats);
+
+           // dd($schedule->room->load('cinema'));
+
+           return Inertia::render('ScheduleRoom',[
+               'date' => [
+                   "current_date" => $date,
+                   'current_time' => $time,
+               ],
+               'movie' => $movie,
+               "room" => $schedule->room->load('cinema'),
+               'schedule' => $schedule->slug,
+               "scheduleSeat" => $movieSeat->make(),
+               'seats' => $schedule->seats,
+           ]);
+       }
 
         try {
  

@@ -17,7 +17,6 @@ const BookingForm = ({action}) => {
         buy,
     } = useBooking();
 
-
     const handleChange = (e) => {
         let key = e.currentTarget.id;
         let value = e.currentTarget.value;

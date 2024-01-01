@@ -18,6 +18,8 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
        return arr;
     }
 
+    
+
     const filter = (array) => {
 
         const filteredArray = [];
@@ -77,10 +79,7 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
         return filteredArray
      }
 
-
-    const data = filter(showEvents)
-
-    console.log(data)
+    const data = filter(showEvents);
 
     const cinemaMarkers = getCinemaMarker(data);
 
@@ -125,7 +124,7 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
                                             {item.events.map(event => (
 
                                                 <div key={event.id} className='bg-blue-500 px-4 py-2'>
-                                                    <Link href={route('book.seats',{slug : movie.slug})} data={{time:event.time, date:currentDate}}>
+                                                    <Link href={route('book.seats',{slug : movie.slug})} data={{time:event.time, date:currentDate, roomId : event.room_id}}>
                                                         <p className=''>{event.time}</p>
                                                     </Link>
                                                 </div>

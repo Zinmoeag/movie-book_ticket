@@ -4,9 +4,8 @@ import { BookingProvider } from "@/Context/BookingContext/BookingContext";
 import { DropMenuProvider } from "@/Context/DropMenu/DropMenu";
 import BookingForm from "@/Components/BookingForm";
 
-const Room = ({scheduleSeats, room, schedule, movie, date}) =>{
+const Room = ({scheduleSeats, seats, room, schedule, movie, date}) =>{
 
-   
     return (
         <>
             <section className="bg-slate-800">
@@ -31,8 +30,9 @@ const Room = ({scheduleSeats, room, schedule, movie, date}) =>{
                         <div className="mt-[8rem]">
                             <h3 className="mb-8 py-2 px-2 bg-slate-400">Seats</h3>
                             <RoomSeat
-                            roomSeats={scheduleSeats.seats}
+                            seats={seats}
                             room={room}
+                            schedule={schedule.slug}
                             />
                         </div>
 

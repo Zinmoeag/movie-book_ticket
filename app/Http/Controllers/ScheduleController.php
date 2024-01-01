@@ -157,7 +157,7 @@ class ScheduleController extends Controller
 
         return Inertia::render($this->adminRoute('Room'),[
             'schedule' => $schedule,
-            'scheduleSeats' => $scheduleSeats->make(),
+            'seats' => $schedule->seats,
             'room' => $schedule->room->load(['cinema']),
             'movie' => $schedule->movie,
             'date' => $schedule->date,
