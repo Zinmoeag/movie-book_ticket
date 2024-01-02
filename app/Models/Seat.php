@@ -19,6 +19,11 @@ class Seat extends Model
         return $this->belongsTo(Price::class);
     }
 
+    public function bookings()
+    {
+        return $this->belongsToMany(Booking::class);
+    }
+
     public static function scopeUpdateStatus($query, $seats, $status)
     {
         $query->whereIn('id', $seats)->update(['status' => $status]);

@@ -1,41 +1,58 @@
 import SeatLayoutGenerator from "@/Utilities/seatLayoutGenerator";
-import { useBooking } from "@/Context/BookingContext/BookingContext";
 import { useSeat } from '@/Context/SeatContext/SeatContext';
 import SeatZone from "./SeatZone";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import BookingInfo from "@/Pages/Admin/Schedule/Partials/BookingInfo";
 
 
-const RoomSeat = ({ seats, room, schedule }) => {
 
-    const {
-        useSeatState,
-    } = useSeat();
+import Modal from "./Modal";
+
+
+const RoomSeat = ({ seats, room, schedule, bookingInfo, authUser }) => {
 
     const {
         seatsObj,
         updateSeat,
-        filterByTypeAndRow
-    } = useSeatState(seats)
+        filterByTypeAndRow,
+        mergeLiveSeats,
+        initialLizeSeats,
+    } = useSeat();
 
+    const [isModalShow, setIsModalShow] = useState(false)
 
-    const {
-        setLiveBookingData,
-    } = useBooking();
+    useEffect(() => {
+        if(bookingInfo){
+            handleModal()
+        }
+    },[bookingInfo])
+
 
 
     const sd = filterByTypeAndRow(seats);
 
-
-
     let roomLayout = SeatLayoutGenerator(room.room_type);
 
+    console.log(roomLayout)
+
     const channel = window.Echo.channel(`booking.${schedule}`);
+
+    useEffect(() => {
+        initialLizeSeats(seats)
+    },[])
 
     useEffect(() => {
         channel.listen('.book', function(data) {
             updateSeat(data.seat)
         });
     }, [channel])
+
+
+    const [count, setCount] = useState(1);
+
+    const handleModal = () => {
+        setIsModalShow(!isModalShow)
+    }
 
     return (
         <>
@@ -53,6 +70,7 @@ const RoomSeat = ({ seats, room, schedule }) => {
                                     <SeatZone
                                         rowLayout = {roomLayout[key]?.layout[i] || []}
                                         seatRow = {seats}
+                                        modalTogle = {handleModal}
                                     />
                                 </li>
                                 <span  className='px-4 text-green-400'>{row}</span>
@@ -60,6 +78,19 @@ const RoomSeat = ({ seats, room, schedule }) => {
                         )})}
                     </div>
                 ))}
+
+
+                {bookingInfo && authUser && (
+                    <Modal
+                    show={isModalShow}
+                    togleModal={e => setIsModalShow(true)}
+                    close={e => setIsModalShow(false)}
+                    >
+                        <BookingInfo
+                            bookingInfo={bookingInfo}
+                        />
+                    </Modal>
+                )}
             </div>
         </>
     )

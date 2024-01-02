@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Schedule;
 use App\Models\Date;
 use App\Models\Movie;
+use App\Models\Seat;
 use App\Utilities\DateFilter;
 use App\Utilities\MovieData;
 use App\Utilities\ScheduleMaker;
@@ -16,6 +17,7 @@ use App\Utilities\RoomLayoutGenerator;
 use App\Utilities\MovieRooms;
 use Carbon\Carbon;
 use App\Utilities\SeatsMaker;
+
 
 
 class ScheduleController extends Controller
@@ -139,12 +141,6 @@ class ScheduleController extends Controller
             'time' => 'required'
         ]);
 
-        $movieId = 1;
-        $date = '2023-12-26';
-        $time = '09:30';
-        $roomId  = [1,5,7,10];
-
-
         $this->schedule->createSchedule($cleanData);
 
         return to_route('admin.schedule');
@@ -155,12 +151,23 @@ class ScheduleController extends Controller
     {
         $scheduleSeats = new SeatsMaker($schedule->seats);
 
+        // $seatId = 259;
+
+        $requestSeatId = request()->input('seat_id');
+
+        // dd($requestSeatId);
+        $seat = Seat::find($requestSeatId);
+        $bookingInfo = $seat ? $seat->bookings()->with('seats')->first() : null;
+
+        // dd($schedule->bookings->load('seats'));
+
         return Inertia::render($this->adminRoute('Room'),[
             'schedule' => $schedule,
             'seats' => $schedule->seats,
             'room' => $schedule->room->load(['cinema']),
             'movie' => $schedule->movie,
             'date' => $schedule->date,
+            'book_seat'=>$schedule->bookings->load('seats')
         ]);
     }
 }

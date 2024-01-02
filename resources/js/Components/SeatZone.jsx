@@ -1,10 +1,10 @@
 import Seat from "./Seat";
-import { useBooking } from "@/Context/BookingContext/BookingContext";
-import { isEqual } from "lodash";
+import { usePage } from "@inertiajs/react";
 import SeatBtn from "./SeatBtn";
+import DropMenuArea from '@/Components/DropMenuArea';
 
 
-const SeatZone = ({seatRow, rowLayout}) => {
+const SeatZone = ({seatRow, rowLayout, modalTogle}) => {
 
     let IndexOfSeat = -1;
 
@@ -20,11 +20,13 @@ const SeatZone = ({seatRow, rowLayout}) => {
                                 IndexOfSeat++;
                                 return (
                                     <SeatBtn
+                                    modalTogle={modalTogle}
                                     key={seat.id}
                                     selected
                                     seat = {seatRow[IndexOfSeat]}
                                     />
                                 )
+                            
                                 
                             })}
                         </ul>

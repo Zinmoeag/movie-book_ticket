@@ -26,6 +26,11 @@ class Schedule extends Model
         return $this->belongsTo(Date::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function room()
     {
         return $this->belongsTo(Room::class);

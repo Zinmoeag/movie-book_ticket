@@ -9,7 +9,7 @@ export const DropMenuProvider = ({children}) => {
     const dropMenuState = useDropMenuState();
 
     return (
-        <DropMenuContext.Provider value={dropMenuState}>
+        <DropMenuContext.Provider value={{...dropMenuState}}>
             {children}
         </DropMenuContext.Provider>
     )

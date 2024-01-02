@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cinema_id')->unsigned();
             $table->integer('room_number');
-            $table->enum('room_type', ['normal', 'red_carpet'])->default('normal');
+            $table->enum('room_type', ['normal', 'smart'])->default('normal');
             $table->timestamps();
         });
     }

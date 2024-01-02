@@ -1,12 +1,12 @@
 import { DropMenu, useDropMenu } from "@/Context/DropMenu/DropMenu";
 
 const DropMenuArea = () => {
-    const {DropMenuChild} = useDropMenu()
+    // const {DropMenuChild} = useDropMenu()
 
     return (
         <>
             <div>
-                <DropMenu />
+                ddd
             </div>
         </>
     )

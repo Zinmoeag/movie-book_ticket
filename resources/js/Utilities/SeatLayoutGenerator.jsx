@@ -19,7 +19,7 @@ const SeatLayoutGenerator = (roomType) => {
                 ],
             }
         }
-    }else if(roomType === 'normal-2'){
+    }else if(roomType === 'smart'){
         return {
             normal : {
                 layout : [

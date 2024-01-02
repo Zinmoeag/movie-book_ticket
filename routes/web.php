@@ -49,7 +49,6 @@ Route::post('/admin/movie/update/{movie:slug}',[MovieController::class, 'update'
 Route::get('/admin/movie/create', [AdminController::class, 'index'])->name('admin.home');
 Route::post('/admin/movie/create', [MovieController::class, 'store'])->name('admin.movie.create');
 Route::delete('/admin/movie/delete/{movie:slug}', [MovieController::class, 'destroy'])->name('admin.movie.delete');
-
 Route::get('/admin/schedule', [ScheduleController::class, 'adminIndex'])->name('admin.schedule');
 Route::get('/admin/schedule/create', [ScheduleController::class, 'create'])->name('admin.schedule.create');
 Route::post('/admin/schedule/create', [ScheduleController::class, 'store'])->name('admin.schedule.store');
