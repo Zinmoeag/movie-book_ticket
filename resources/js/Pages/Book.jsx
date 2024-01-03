@@ -89,7 +89,37 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
             <AppLayout>
                 <section className='py-10 w-[80%] mx-auto'>
 
-                    <div className='flex gap-6'>
+                    <div>
+                        <div className='flex gap-6 my-[2rem]'>
+                            <div className='w-[20rem]'>
+                                <img src={movie.movie_photo} alt="" />
+                            </div>
+
+
+                            <div className='flex-1'>
+                                <h1 className='uppercase text-yellow-400 text-[3rem] font-bold'>{movie.movie}</h1>
+                                <p>Release Date - {movie.release_date}</p>
+                                <p>Duration - {movie.duration}</p>
+                                <p className='my-6 text-justify'>
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut cum id mollitia quod asperiores, magni sapiente, beatae ab suscipit assumenda, laboriosam culpa est! Consequatur placeat quasi voluptatem earum voluptatum maiores.
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut cum id mollitia quod asperiores, magni sapiente, beatae ab suscipit assumenda, laboriosam culpa est! Consequatur placeat quasi voluptatem earum voluptatum maiores.
+                                </p>
+
+
+                                <div className='text-xl mt-14 '>
+                                    <a 
+                                    href="#book"
+                                    className='bg-blue-500 hover:bg-blue-800 rounded-full px-10 py-4'
+                                    >
+                                        Book now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className='flex gap-6 pt-[6rem] mb-[4rem]' id="book">
                         <div id='map' className='w-[20rem] h-[20rem] bg-green-800'>
                             <Map
                             config = {{
@@ -110,6 +140,7 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
                                     routeName={'schedule'}
                                     path = {{slug : movie.slug}}
                                     parameter='time'
+                                    removeAll={true}
                                     
                                 />
                                 </div>

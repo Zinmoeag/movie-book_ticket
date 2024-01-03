@@ -53,6 +53,9 @@ Route::get('/admin/schedule', [ScheduleController::class, 'adminIndex'])->name('
 Route::get('/admin/schedule/create', [ScheduleController::class, 'create'])->name('admin.schedule.create');
 Route::post('/admin/schedule/create', [ScheduleController::class, 'store'])->name('admin.schedule.store');
 Route::get('/admin/schedule/{schedule:slug}', [ScheduleController:: class, "room"])->name('admin.schedule.room');
+Route::get('/admin/schedule/edit/{schedule:slug}', [ScheduleController:: class, "edit"])->name('admin.schedule.edit');
+Route::put('/admin/schedule/update/Date/{schedule:slug}', [ScheduleController:: class, "updateDate"])->name('admin.schedule.update.date');
+Route::put('/admin/schedule/update/movie/{schedule:slug}', [ScheduleController:: class, "updateMovie"])->name('admin.schedule.update.movie');
 
 Route::post('/buy/{schedule:slug}', [BookingController::class, 'buy'])->name("buy.post");
 

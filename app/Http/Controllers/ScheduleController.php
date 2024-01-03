@@ -62,7 +62,7 @@ class ScheduleController extends Controller
 
             $isExist = $movie->dates()->where('date', Carbon::now()->toDateString())->first();
 
-            $defaultDate = $isExist ? $isExist->date : $movie->dates->first()->date ;
+            $defaultDate = $isExist ? $isExist->date : $movie->dates->first()?->date ;
 
             return redirect('/schedule/'.$movie->slug.'?time='.$defaultDate);
         }
@@ -112,7 +112,6 @@ class ScheduleController extends Controller
 
         $cinemaId = $cleanData['cinema'] ?? null;
 
-
         $dates = Date::groupBy('date')
                 ->select(['date'])
                 ->get();
@@ -120,7 +119,6 @@ class ScheduleController extends Controller
         $time = Date::groupBy('time')
                 ->select(['time'])
                 ->get(); 
-
 
         //cinema and rooms
         $cinemas = Cinema::latest()->with(['rooms'])->get();
@@ -169,6 +167,39 @@ class ScheduleController extends Controller
             'date' => $schedule->date,
             'book_seat'=>$schedule->bookings->load('seats')
         ]);
+    }
+
+    public function edit(Schedule $schedule)
+    {
+        $movies = MovieData::getDropDownValue('id');
+
+        return Inertia::render($this->adminRoute('Edit'),[
+            'schedule' => $schedule,
+            'movies' => $movies
+        ]);
+    }
+
+    public function updateDate(Schedule $schedule)
+    {
+        $cleanData = request()->validate([
+            'date' => 'required',
+            'time' => 'required',
+        ]);
+
+        $this->schedule->updateDate($schedule, $cleanData['date'], $cleanData['time']);
+  
+    }
+
+    public function updateMovie(Schedule $schedule)
+    {
+        $cleanData = request()->validate([
+            'movie_id' => 'required',
+        ]);
+
+        $schedule->update([
+            'movie_id' => $cleanData['movie_id'],
+        ]);
+        
     }
 }
  

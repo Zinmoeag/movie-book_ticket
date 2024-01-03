@@ -10,7 +10,9 @@ const FilterDropDown = ({
 	path,
 	routeName,
 	parameter,
-	menu}) => {
+	menu,
+	removeAll
+}) => {
 
 	const [toggle, setToggle] = useState(false);
 
@@ -55,18 +57,21 @@ const FilterDropDown = ({
 
 
 				<ul className={`${toggle ? 'h-fit' : "h-[0rem]"} bg-white/80 backdrop-blur-sm flex flex-col gap-2 overflow-hidden transition-all duration-500 w-[10rem] absolute left-0 z-20 shadow-lg`}>
-					<Link
-						href={path ? route(routeName, path) : route(routeName)}
-						data =  {parameter && makeQuery('')}
-					>
-						<li  className="w-full hover:bg-slate-300 px-2 py-2 hover:bg-slate-500 hover:text-white">
-							All
-						</li>
-					</Link>
+					{!removeAll && 
+						(<Link
+							href={path ? route(routeName, path) : route(routeName)}
+							data =  {parameter && makeQuery('')}
+						>
+							<li  className="w-full hover:bg-slate-300 px-2 py-2 hover:bg-slate-500 hover:text-white">
+								All
+							</li>
+						</Link>)
+					}
 					{menu && menu.map((item) => {
 
 						return (
                             <Link
+								preserveScroll
 								key={item.id}
                                 href={path ? route(routeName, path) : route(routeName)}
 								data = {parameter ? makeQuery(item.value) : ''}

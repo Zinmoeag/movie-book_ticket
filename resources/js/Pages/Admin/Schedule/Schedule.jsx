@@ -63,7 +63,11 @@ const Schedule = ({schedules, dates, movies}) => {
                                             <td>{item.room?.cinema?.cinema_name}/cinema-{item.room?.room_number}</td>
                                             <td>{item.available_seats}</td>
                                             <td className="flex justify-center gap-4 px-4">
-                                                <Link className="text-blue-600">
+
+                                                <Link
+                                                href={route('admin.schedule.edit', {slug: item.slug})}
+                                                className="text-blue-600"
+                                                >
                                                     <FontAwesomeIcon icon={faPenToSquare} />
                                                 </Link>
                                                 <Link
@@ -72,6 +76,7 @@ const Schedule = ({schedules, dates, movies}) => {
                                                 >
                                                     <FontAwesomeIcon icon={faEye} />
                                                 </Link>
+                                                
                                             </td>
                                         </tr>
                                     ))}

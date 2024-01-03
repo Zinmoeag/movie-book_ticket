@@ -4,6 +4,7 @@ import FormInput from "@/Components/FormInput.";
 import { useState } from "react";
 import SelectInput from "@/Components/SelectInput";
 import RoomSelectorComponenst from "./RoomSelectorComponents";
+import DateTimeForm from "./DateTimeForm";
 
 const ScheduleForm = ({movies, rooms, cinemas}) => {
 
@@ -21,8 +22,6 @@ const ScheduleForm = ({movies, rooms, cinemas}) => {
         time : '',
         room_id : [],
     });
-
-    console.log(errors)
 
     const [cinemaMenuShow, setCinemaMenuShow] = useState(null);
 
@@ -63,22 +62,10 @@ const ScheduleForm = ({movies, rooms, cinemas}) => {
 
                 </div>
 
-                <div className="flex items-end gap-2">
-
-                    <FormDateInput
-                    label="Date"
-                    id='date'
-                    value = {data.date}
-                    onChange={e => setData('date', e.target.value)}
-                    error={null}
-                    />
-
-
-                    <input
-                    onChange={e => setData('time', e.target.value)}
-                    value={data.time}
-                    type="time"
-                    className="bg-transparent h-fit my-2"
+                <div>
+                    <DateTimeForm
+                    data={data}
+                    setData={setData}
                     />
                 </div>
 

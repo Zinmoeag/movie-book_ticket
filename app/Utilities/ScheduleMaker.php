@@ -22,6 +22,14 @@ class ScheduleMaker
         })->first();
     }
 
+    public function createDate($date, $time)
+    {
+        return Date::create([
+            'date' => $date,
+            'time' => $time,
+        ]);
+    }
+
     public function createSchedule($data)
     {
 
@@ -34,10 +42,7 @@ class ScheduleMaker
                 $data["room_id"]
             );
         }else{
-            $newDate = Date::create([
-                'date' => $data['date'],
-                'time' => $data['time'],
-            ]);
+            $newDate = $this->createDate($date['date'], $date['time']);
 
             $this->createScheduleSeat(
                 $data['movie_id'], 
@@ -47,6 +52,27 @@ class ScheduleMaker
         }
     }
 
+    public function updateDate($schedule, $date, $time)
+    {
+        $existedDate = $this->getExistedDate($date, $time);
+
+        if($existedDate){
+            $schedule->update([
+                'date_id' => $existedDate->id,
+            ]);
+        }else{
+            $newDate = $this->createDate($date, $time);
+
+            $schedule->update([
+                'date_id' => $newDate->id,
+            ]);
+
+        }
+    }
+
+
+
+
     public function createScheduleSeat($movieId, $dateId, $roomIds)
     {
         $rooms = Room::whereIn('id' , $roomIds)->get()->toArray();
@@ -54,8 +80,6 @@ class ScheduleMaker
         foreach($rooms as $room)
         {
             $slug = Str::random(20);
-
-            // var_dump($room['id']);
             
                 $schedule = Schedule::create([
                     'slug' =>  $slug,
@@ -67,7 +91,7 @@ class ScheduleMaker
                 $newSchedule = new RoomLayoutGenerator($room['room_type'], $schedule->id);
                 $newSchedule->get();
             }
-            // dd('ee');
+
     }
 
 
