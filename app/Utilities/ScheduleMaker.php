@@ -42,7 +42,7 @@ class ScheduleMaker
                 $data["room_id"]
             );
         }else{
-            $newDate = $this->createDate($date['date'], $date['time']);
+            $newDate = $this->createDate($data['date'], $data['time']);
 
             $this->createScheduleSeat(
                 $data['movie_id'], 

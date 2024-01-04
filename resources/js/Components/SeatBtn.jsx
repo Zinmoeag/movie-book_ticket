@@ -5,18 +5,18 @@ import { useState } from "react"
 import {usePage} from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 
-const SeatBtn = ({ seat , showOptionMenu, seeInfo}) => {
+const SeatBtn = ({ seat , showOptionMenu, seeInfo, modalTogle}) => {
     
     const {
         props : {
             auth : {user},
-            adminBooking,
         }
     } = usePage();
 
     const {
         setBooking, 
         data,
+        showBookingInfo
     } = useBooking();
 
 
@@ -62,7 +62,10 @@ const SeatBtn = ({ seat , showOptionMenu, seeInfo}) => {
                         <li className="px-4">
                             <button
                             type="button"
-                            onClick={e => adminBooking.seeBookingInfo(seat.id)}
+                            onClick={e => {
+                                showBookingInfo(seat.id, user)
+                                modalTogle()
+                            }}
                             >
                                 See Info
                             </button>

@@ -9,7 +9,6 @@ import { DropMenuProvider } from '@/Context/DropMenu/DropMenu';
 
 const ScheduleRoom = ({seats, schedule, room, movie, date, user}) => {
 
-    // console.log(user)
     return (
         <>
             <AppLayout>
@@ -45,6 +44,7 @@ const ScheduleRoom = ({seats, schedule, room, movie, date, user}) => {
                                             seats={seats}
                                             room={room}
                                             schedule={schedule}
+                                            book_seat ={ null}
                                         />
                                     </div>
 

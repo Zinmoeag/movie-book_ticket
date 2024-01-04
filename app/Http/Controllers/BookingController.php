@@ -44,11 +44,24 @@ class BookingController extends Controller
 
         $seatId = $this->bookingHandling->getSeatIds($validated['seat']);
 
-        $this->bookingHandling->storeRecord($validated, $schedule, $seatId);
+        $booking = $this->bookingHandling->storeRecord($validated, $schedule, $seatId);
 
         $seats = Seat::updateStatus($seatId, 2);
+
+        if(auth()->user()){
+            event(new BookEvent(
+                $seats->get()->toArray(), 
+                $schedule->slug, 
+                $booking->load('seats')
+            ));
+        }else{
+            event(new BookEvent(
+                $seats->get()->toArray(), 
+                $schedule->slug, 
+                null,
+            ));
+        }
         
-        event(new BookEvent($seats->get()->toArray(), $schedule->slug));
     }
 
 

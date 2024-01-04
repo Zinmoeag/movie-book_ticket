@@ -3,13 +3,13 @@ import { useSeat } from '@/Context/SeatContext/SeatContext';
 import SeatZone from "./SeatZone";
 import { useEffect, useState } from "react";
 import BookingInfo from "@/Pages/Admin/Schedule/Partials/BookingInfo";
-
+import { useBooking } from '@/Context/BookingContext/BookingContext';
 
 
 import Modal from "./Modal";
 
 
-const RoomSeat = ({ seats, room, schedule, bookingInfo, authUser }) => {
+const RoomSeat = ({ seats, room, schedule, authUser, book_seat }) => {
 
     const {
         seatsObj,
@@ -19,35 +19,35 @@ const RoomSeat = ({ seats, room, schedule, bookingInfo, authUser }) => {
         initialLizeSeats,
     } = useSeat();
 
+    const {
+        initialLizeBookingUser,
+        updateBookingUsers,
+        bookingInfo,
+    } = useBooking()
+
     const [isModalShow, setIsModalShow] = useState(false)
 
     useEffect(() => {
-        if(bookingInfo){
-            handleModal()
-        }
-    },[bookingInfo])
-
-
+        initialLizeSeats(seats)
+        initialLizeBookingUser(book_seat)
+    },[])
 
     const sd = filterByTypeAndRow(seats);
 
     let roomLayout = SeatLayoutGenerator(room.room_type);
 
-    console.log(roomLayout)
-
     const channel = window.Echo.channel(`booking.${schedule}`);
-
-    useEffect(() => {
-        initialLizeSeats(seats)
-    },[])
 
     useEffect(() => {
         channel.listen('.book', function(data) {
             updateSeat(data.seat)
+            updateBookingUsers(data.booking)
+
+            console.log(data)
         });
     }, [channel])
 
-
+   
     const [count, setCount] = useState(1);
 
     const handleModal = () => {
@@ -79,7 +79,6 @@ const RoomSeat = ({ seats, room, schedule, bookingInfo, authUser }) => {
                     </div>
                 ))}
 
-
                 {bookingInfo && authUser && (
                     <Modal
                     show={isModalShow}
@@ -91,9 +90,13 @@ const RoomSeat = ({ seats, room, schedule, bookingInfo, authUser }) => {
                         />
                     </Modal>
                 )}
+
+
+
             </div>
         </>
     )
 }
 
 export default RoomSeat;
+

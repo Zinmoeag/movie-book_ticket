@@ -36,7 +36,6 @@ const ScheduleForm = ({movies, rooms, cinemas}) => {
         let existedRoom = data.room_id.indexOf(roomId) >= 0;
         if(existedRoom){
             const updatedRooms = data.room_id.filter(existed => existed !== roomId);
-            console.log(updatedRooms, roomId)
             setData('room_id', updatedRooms);
         }else{
             setData('room_id', [

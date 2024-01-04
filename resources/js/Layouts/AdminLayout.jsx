@@ -37,7 +37,6 @@ export default function AdminLayout({children}){
                                         menu = {[
                                             {id:1,name: "New Schedule", link : route('admin.schedule.create')},
                                             {id:2,name: "Schedules", link : route('admin.schedule')},
-                                            {id:3,name: "Edit Schedule", link : route('admin.movie.edit.all')},
                                         ]}
                                         display={"Schedule"}
                                     />

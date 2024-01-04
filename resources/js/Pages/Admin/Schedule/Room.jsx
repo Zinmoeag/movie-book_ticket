@@ -11,25 +11,6 @@ import { useState } from "react";
 const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
 
     const {props} = usePage();
-    const [bookingInfo, setBookingInfo] = useState(null);
-
-    props.adminBooking = {
-        seeBookingInfo : (id) => {
-
-           let bookingInfo = book_seat.filter(seat => {
-                let isture = false;
-                seat.seats.forEach(s => {
-                    if(s.id === id){
-                        isture = true;
-                    }
-                });
-                return isture;
-            })[0];
-
-            setBookingInfo(bookingInfo);
-        }
-    };
-
 
     return (
         <>
@@ -57,10 +38,10 @@ const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
                                     <h3 className="mb-8 py-2 px-2 bg-slate-400">Seats</h3>
                                     <RoomSeat
                                     authUser={props.auth.user}
-                                    bookingInfo={bookingInfo}
                                     seats={seats}
                                     room={room}
                                     schedule={schedule.slug}
+                                    book_seat = {book_seat}
                                     />
                                 </div>
 
@@ -86,3 +67,4 @@ const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
 }
 
 export default Room;
+

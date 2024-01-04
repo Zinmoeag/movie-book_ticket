@@ -2,8 +2,9 @@ import AdminLayout from "@/Layouts/AdminLayout";
 import DateTimeForm from "./Partials/DateTimeForm";
 import { useForm } from "@inertiajs/react";
 import SelectInput from "@/Components/SelectInput";
+import RoomSelectorComponenst from './Partials/RoomSelectorComponents'
 
-const Edit = ({ schedule, movies }) => {
+const Edit = ({ schedule, movies, cinemas }) => {
 
     const {
         data,
@@ -12,6 +13,7 @@ const Edit = ({ schedule, movies }) => {
     } = useForm({
         date : '',
         time : '',
+        room_id : '',
     })
 
     const handleSubmit = (e) => {
@@ -22,6 +24,17 @@ const Edit = ({ schedule, movies }) => {
     const handleMovieSubmit = (e) => {
         e.preventDefault();
         put(route('admin.schedule.update.movie', {slug : schedule.slug}));
+    }
+
+    const handleRoomSubmit = (e) => {
+        e.preventDefault();
+        put(route('admin.schedule.update.room', {slug : schedule.slug}));
+
+    }
+
+
+    const handleSelect = (room_id) => {
+        setData('room_id', room_id);
     }
 
     return (
@@ -48,7 +61,7 @@ const Edit = ({ schedule, movies }) => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className=" my-6 py-4 border-slate-600 border-y-[0.01rem]">
                         <div className="flex flex-col w-[30rem]">
                             <form onSubmit={handleMovieSubmit}>
                                 <div className="my-4">
@@ -68,6 +81,25 @@ const Edit = ({ schedule, movies }) => {
                             </form>
                         </div>
                     </div>
+
+                    
+                    <div className=" my-6 py-4 border-slate-600 border-y-[0.01rem]">
+                        <form onSubmit={handleRoomSubmit}>
+                            <RoomSelectorComponenst
+                            cinemas = {cinemas}
+                            handleSelect={handleSelect}
+                            selectedItems={[data.room_id]} 
+                            />
+
+                            <button
+                            type="submit"
+                            className="py-2 px-6 bg-slate-900 hover:bg-slate-950"
+                            >
+                                Change Room
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </AdminLayout>
         </>

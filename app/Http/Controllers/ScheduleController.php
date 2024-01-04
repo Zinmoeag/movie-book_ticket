@@ -172,10 +172,12 @@ class ScheduleController extends Controller
     public function edit(Schedule $schedule)
     {
         $movies = MovieData::getDropDownValue('id');
+        $cinemas = Cinema::latest()->with(['rooms'])->get();
 
         return Inertia::render($this->adminRoute('Edit'),[
             'schedule' => $schedule,
-            'movies' => $movies
+            'movies' => $movies,
+            'cinemas' => $cinemas,
         ]);
     }
 
@@ -200,6 +202,17 @@ class ScheduleController extends Controller
             'movie_id' => $cleanData['movie_id'],
         ]);
         
+    }
+
+    public function updateSeat(Schedule $schedule)
+    {
+        $cleanData = request()->validate([
+            'room_id' => "required"
+        ]);
+
+        $schedule->update([
+            'room_id' => $cleanData['room_id'],
+        ]);
     }
 }
  

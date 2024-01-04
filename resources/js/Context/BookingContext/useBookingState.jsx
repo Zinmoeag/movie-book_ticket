@@ -7,6 +7,7 @@ import Ticket from "@/Components/Ticket";
 
 const useBookingState = () => {
 
+
     const initialData = {
         name : "",
         email : "",
@@ -14,10 +15,7 @@ const useBookingState = () => {
         seat : [],
     };
 
-    const initialLiveData = [];
-
-
-    const [liveData, setLiveData] = useState(initialLiveData);
+    const [bookingInfo, setBookingInfo] = useState(null);
 
     const { 
     data, 
@@ -26,6 +24,23 @@ const useBookingState = () => {
     processing,
     reset,
     errors } = useForm(initialData);
+
+    const [liveData, setLiveData] = useState([]);
+    const [bookingUsers, setBookingUser] = useState(null);
+
+    const initialLizeBookingUser = (users) => {
+      setBookingUser(users);
+    }
+
+    const updateBookingUsers = (newUser) => {
+
+        setBookingUser(prev => {
+            return [
+                ...prev,
+                newUser,
+            ]
+        })
+    }
 
     const setLiveBookingData = (key, seats) => {
       setLiveData([
@@ -49,11 +64,10 @@ const useBookingState = () => {
     };
 
     const removeSeat = (seat) => {
+        // Use filter to create a new array excluding the item with the specified ID
+        const updatedSeats = data.seat.filter(existedSeat => existedSeat.id !== seat.id);
 
-            // Use filter to create a new array excluding the item with the specified ID
-            const updatedSeats = data.seat.filter(existedSeat => existedSeat.id !== seat.id);
-
-            setData('seat', updatedSeats);
+        setData('seat', updatedSeats);
     }
 
     const submitBooking = (schedule) => {
@@ -64,8 +78,6 @@ const useBookingState = () => {
             onSuccess: page => {
                 //reset Data
                 reset();
-
-                // showWithChild(<div>success</div>);
             },
         });
     }
@@ -78,10 +90,34 @@ const useBookingState = () => {
             onSuccess: page => {
                 //reset Data
                 reset();
-                // showWithChild(<div>success</div>);
             },
         });
     }
+
+    // console.log(bookingInfo)
+
+    const showBookingInfo = (id, user) => {
+
+        if(user){
+
+           let bookingInfo = bookingUsers.filter(user => {
+
+                let isture = false;
+                user.seats.forEach(s => {
+                    if(s.id === id){
+                        isture = true;
+                    }
+                });
+                return isture;
+            })[0];
+
+
+            setBookingInfo(bookingInfo);
+        }else{
+            setBookingInfo(null)
+        }
+
+    }   
 
     return {
         data,
@@ -92,7 +128,11 @@ const useBookingState = () => {
         submitBooking,
         buy,
         liveData,
-        setLiveBookingData
+        setLiveBookingData,
+        initialLizeBookingUser,
+        updateBookingUsers,
+        bookingInfo,
+        showBookingInfo,
     }
 }
 

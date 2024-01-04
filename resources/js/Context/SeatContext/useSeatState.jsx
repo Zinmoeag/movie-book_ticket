@@ -6,8 +6,10 @@ const useBookingState = () => {
 
   const [seatsObj, setSeatsObj ] = useState({
         avaliable_seat : "",
-        seats : [],
+        seats : [], 
   });
+
+
 
 
   const [newSeats, setNewSeats] = useState([]) 
@@ -24,9 +26,8 @@ const useBookingState = () => {
       )
   }
 
-  const mergeLiveSeats  = (seats) => {
 
-    
+  const mergeLiveSeats  = (seats) => {
     const newLiveSeats = [
       ...newSeats,
       ...seats

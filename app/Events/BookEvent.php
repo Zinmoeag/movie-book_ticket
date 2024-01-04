@@ -19,12 +19,14 @@ class BookEvent implements ShouldBroadcast
      */
     public $seat;
     public $schedule;
+    public $booking;
 
 
-    public function __construct(array $seat, string $schedule)
+    public function __construct(array $seat, string $schedule, $booking)
     {
         $this->seat  = $seat;
         $this->schedule = $schedule;
+        $this->booking = $booking;
     }
 
     /**

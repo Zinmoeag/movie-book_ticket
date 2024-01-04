@@ -33,6 +33,8 @@ class BookingHandling
 
         $booking->seats()->attach($seatId);
 
+        return $booking;
+
         
     }
 }

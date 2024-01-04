@@ -56,6 +56,7 @@ Route::get('/admin/schedule/{schedule:slug}', [ScheduleController:: class, "room
 Route::get('/admin/schedule/edit/{schedule:slug}', [ScheduleController:: class, "edit"])->name('admin.schedule.edit');
 Route::put('/admin/schedule/update/Date/{schedule:slug}', [ScheduleController:: class, "updateDate"])->name('admin.schedule.update.date');
 Route::put('/admin/schedule/update/movie/{schedule:slug}', [ScheduleController:: class, "updateMovie"])->name('admin.schedule.update.movie');
+Route::put('/admin/schedule/update/room/{schedule:slug}', [ScheduleController:: class, "updateSeat"])->name('admin.schedule.update.room');
 
 Route::post('/buy/{schedule:slug}', [BookingController::class, 'buy'])->name("buy.post");
 
