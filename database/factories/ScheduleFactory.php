@@ -34,43 +34,51 @@ class ScheduleFactory extends Factory
                 "schedule_id" => $schedule->id,
                 'row' => 'A',
                 "seat_type" => "normal",
+                'role' => 1,
             ]);
             \App\Models\Seat::factory(18)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'B',
                 "seat_type" => "normal",
+                'role' => 1,
             ]);
             \App\Models\Seat::factory(18)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'C',
                 "seat_type" => "normal",
+                'role' => 2,
             ]);
             \App\Models\Seat::factory(18)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'D',
                 "seat_type" => "normal",
+                'role' => 2,
             ]);
             \App\Models\Seat::factory(18)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'E',
                 "seat_type" => "normal",
+                'role' => 2,
             ]);
             \App\Models\Seat::factory(18)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'F',
                 "seat_type" => "normal",
+                'role' => 3,
             ]);
 
             \App\Models\Seat::factory(18)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'G',
                 "seat_type" => "normal",
+                'role' => 3,
             ]);
 
             \App\Models\Seat::factory(6)->create([
                 "schedule_id" => $schedule->id,
                 'row' => 'H',
                 "seat_type" => "couple",
+                'role' => 4,
             ]);
         });
     }

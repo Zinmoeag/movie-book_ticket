@@ -43,7 +43,7 @@ const RoomSelectorComponenst = ({cinemas, handleSelect, selectedItems}) => {
                                             <h3>
                                                 {"cinema -"+ room.room_number + " ("+cinema.cinema_name+")"}
                                             </h3>
-                                            <h3>{room.room_type} room</h3>
+                                            <h3 className="text-slate-800 font-bold text-xl">{room.room_type} room</h3>
                                         </div>
                                     </div>
                                 </>

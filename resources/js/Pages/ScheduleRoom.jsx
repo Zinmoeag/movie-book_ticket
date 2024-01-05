@@ -7,7 +7,19 @@ import { DropMenuProvider } from '@/Context/DropMenu/DropMenu';
 
 
 
-const ScheduleRoom = ({seats, schedule, room, movie, date, user}) => {
+const ScheduleRoom = ({seats, schedule, room, movie, date, user, price}) => {
+
+    const roleColorGenerator = (role) => {
+        if(role === 'front'){
+            return 'bg-red-400'
+        }else if(role === 'mid'){
+            return 'bg-green-600'
+        }else if(role === 'back'){
+            return 'bg-blue-400'
+        }else if(role === 'couple'){
+            return 'bg-yellow-400'
+        }
+    }
 
     return (
         <>
@@ -46,19 +58,33 @@ const ScheduleRoom = ({seats, schedule, room, movie, date, user}) => {
                                             schedule={schedule}
                                             book_seat ={ null}
                                         />
+
                                     </div>
 
-                                    <div className='w-[60rem] mx-auto bg-gradient-to-r from-rose-600 to-amber-400 px-4 py-6 rounded-t-[30px]'>
-                                        
-                                        <div className='py-4 border-b-[0.1rem] border-dashed border-red-900 '>
-                                            <h3 className='text-2xl text-white uppercase font-bold'>
-                                                Let's Book now!
-                                            </h3>
+                                    <div className='flex gap-6 w-fit mx-auto'>
+                                        <div className='w-[60rem] bg-gradient-to-r from-rose-600 to-amber-400 px-4 py-6 rounded-tl-[30px]'>
+                                            
+                                            <div className='py-4 border-b-[0.1rem] border-dashed border-red-900 '>
+                                                <h3 className='text-2xl text-white uppercase font-bold'>
+                                                    Let's Book now!
+                                                </h3>
+                                            </div>
+
+                                            <BookingForm
+                                            action= {schedule}
+                                            />
                                         </div>
 
-                                        <BookingForm
-                                        action= {schedule}
-                                        />
+                                        <div id='price' className='flex flex-col gap-4'>
+                                            {price.map(price => (
+                                                <>
+                                                <div className='flex gap-6 items-center text-sm'>
+                                                    <div className={'w-4 h-4 ' + roleColorGenerator(price.role)}></div>
+                                                    <h3>{price.price} Ks</h3>
+                                                </div>
+                                                </>
+                                            ))}
+                                        </div>
                                     </div>
                             </div>
                     </SeatProvider>

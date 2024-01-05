@@ -28,6 +28,9 @@ const useBookingState = () => {
     const [liveData, setLiveData] = useState([]);
     const [bookingUsers, setBookingUser] = useState(null);
 
+    //controlls
+    const [btnOptionMenu, setBtnOptionMenu] = useState(false);
+
     const initialLizeBookingUser = (users) => {
       setBookingUser(users);
     }
@@ -133,6 +136,8 @@ const useBookingState = () => {
         updateBookingUsers,
         bookingInfo,
         showBookingInfo,
+        btnOptionMenu, 
+        setBtnOptionMenu
     }
 }
 

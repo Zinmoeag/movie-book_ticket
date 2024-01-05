@@ -42,16 +42,25 @@ export default function AdminLayout({children}){
                                     />
                                 </li>
 
+                                
                                 <li className="">
                                     <MenuDropDown 
                                         menu = {[
-                                            {id:1,name: "New Cinema", onClick : () => console.log('dd') },
+                                            {id:1,name: "New Cinema", link : route('admin.cinema.create')},
                                             {id:2,name: "New Room", onClick : () => console.log('dd') }
+                                        ]}
+                                        display={"Booking"}
+                                    />
+                                </li>
 
+                                <li className="">
+                                    <MenuDropDown 
+                                        menu = {[
+                                            {id:1,name: "New Cinema", link : route('admin.cinema.create')},
+                                            {id:2,name: "New Room", onClick : () => console.log('dd') }
                                         ]}
                                         display={"Cinema"}
                                     />
-                                    
                                 </li>
                             </ul>
                         </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CinemaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-///admin  --> middleware('admin')
 Route::get('/admin/movie', [MovieController::class, 'AdminIndex'])->name('admin.movie');
 Route::get('/admin/movie/edit/all', [MovieController::class, 'editAll'])->name('admin.movie.edit.all');
 Route::get('/admin/movie/edit/{movie:slug}', [MovieController::class, 'edit'])->name('admin.movie.edit');
@@ -57,6 +57,8 @@ Route::get('/admin/schedule/edit/{schedule:slug}', [ScheduleController:: class, 
 Route::put('/admin/schedule/update/Date/{schedule:slug}', [ScheduleController:: class, "updateDate"])->name('admin.schedule.update.date');
 Route::put('/admin/schedule/update/movie/{schedule:slug}', [ScheduleController:: class, "updateMovie"])->name('admin.schedule.update.movie');
 Route::put('/admin/schedule/update/room/{schedule:slug}', [ScheduleController:: class, "updateSeat"])->name('admin.schedule.update.room');
+Route::get('/admin/cinema/new', [CinemaController::class, 'create'])->name('admin.cinema.create');
+Route::post('/admin/cinema/new', [CinemaController::class, 'store'])->name('admin.cinema.store');
 
 Route::post('/buy/{schedule:slug}', [BookingController::class, 'buy'])->name("buy.post");
 

@@ -6,7 +6,7 @@ import { usePage } from '@inertiajs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const BookingForm = ({action}) => {
+const BookingForm = ({action, adminPage}) => {
 
     const {
         data,
@@ -16,6 +16,12 @@ const BookingForm = ({action}) => {
         submitBooking,
         buy,
     } = useBooking();
+
+    const {
+        props : {
+            auth : {user}
+        }
+    } = usePage()
 
     const handleChange = (e) => {
         let key = e.currentTarget.id;
@@ -78,16 +84,19 @@ const BookingForm = ({action}) => {
                         </div>
                     </form>
 
-                    <form onSubmit={handleBuy}>
-                        <div className='flex justify-end'> 
-                            <button
-                            type='submit'
-                            className='bg-blue-950 py-2 px-4 rounded-full'
-                            >
-                                Buy Ticket
-                            </button>
-                        </div>
-                    </form>
+
+                    {user && user.role === 'admin' && adminPage && (
+                        <form onSubmit={handleBuy}>
+                            <div className='flex justify-end'> 
+                                <button
+                                type='submit'
+                                className='bg-blue-950 py-2 px-4 rounded-full'
+                                >
+                                    Buy Ticket
+                                </button>
+                            </div>
+                        </form>
+                    )}
                 </div>
 
             </div>

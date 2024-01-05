@@ -14,6 +14,7 @@ use App\Models\Event;
 use App\Http\Requests\MovieStoreRequest;
 use App\Http\Requests\MovieUpdateRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Price;
 
 class MovieController extends Controller
 {
@@ -57,30 +58,29 @@ class MovieController extends Controller
         $schedule = Schedule::latest()->getSchedule(request(['date','time','roomId']))->first();
 
 
-       if($schedule){
-           $movieSeat = new SeatsMaker($schedule->seats);
-
-           // dd($schedule->room->load('cinema'));
-
-           return Inertia::render('ScheduleRoom',[
-               'date' => [
-                   "current_date" => $date,
-                   'current_time' => $time,
-               ],
-               'movie' => $movie,
-               "room" => $schedule->room->load('cinema'),
-               'schedule' => $schedule->slug,
-               "scheduleSeat" => $movieSeat->make(),
-               'seats' => $schedule->seats,
-           ]);
-       }
-
+        
         try {
+            if($schedule){
+                $movieSeat = new SeatsMaker($schedule->seats);
+     
+                return Inertia::render('ScheduleRoom',[
+                    'date' => [
+                        "current_date" => $date,
+                        'current_time' => $time,
+                    ],
+                    'movie' => $movie,
+                    "room" => $schedule->room->load('cinema'),
+                    'schedule' => $schedule->slug,
+                    "scheduleSeat" => $movieSeat->make(),
+                    'seats' => $schedule->seats,
+                    'price' => Price::all(),
+                ]);
+            }
  
             
         } catch (\Throwable $th) {
-            //throw $th;
-            // return abort(404);
+            throw $th;
+            return abort(404);
         }
     }
 

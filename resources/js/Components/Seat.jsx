@@ -1,6 +1,6 @@
 const Seat = ({seat, selected}) => {
 
-    const seatImage = (status, seatType, selected) => {
+    const seatImage = (status, seatType, role, selected) => {
         
         if(seatType === 'normal'){
             if(status === 'avaliable'){
@@ -8,7 +8,15 @@ const Seat = ({seat, selected}) => {
                     // console.log('dd')
                     return "/images/seat/bookedSeat.png"
                 }else{
-                    return "/images/seat/availableSeat.png"
+                    if(role === 'front'){
+                        return "/images/seat/availableFrontSeat.png"
+                    }
+                    if(role === 'mid'){
+                        return "/images/seat/availableMidSeat.png"
+                    }
+                    if(role === 'back'){
+                        return "/images/seat/availableBackSeat.png"
+                    }
                 }
             }
             else if(status === 'booked'){
@@ -39,7 +47,7 @@ const Seat = ({seat, selected}) => {
                     
                     <img 
                     className="h-[40px]"
-                    src={seatImage(seat?.status, seat?.seat_type, selected)}
+                    src={seatImage(seat?.status, seat?.seat_type, seat?.role, selected)}
                     alt="" 
                     />
                     <p>

@@ -15,12 +15,19 @@ class PriceSeeder extends Seeder
     {
         $prices = [
             [
+                'role' => 1,
                 "price" => 6000, 
             ],
             [
+                'role' => 2,
+                'price' => 7000,
+            ],
+            [
+                'role' => 3,
                 'price' => 8000,
             ],
             [
+                'role' => 4,
                 'price' => 16000,
             ],
         ];

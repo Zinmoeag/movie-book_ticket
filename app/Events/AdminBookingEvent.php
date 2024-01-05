@@ -10,21 +10,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BookEvent implements ShouldBroadcast
+class AdminBookingEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $seat;
-    public $schedule;
 
-
-    public function __construct(array $seat, string $schedule)
+    public function __construct(public string $schedule, public $booking)
     {
-        $this->seat  = $seat;
-        $this->schedule = $schedule;
+
     }
 
     /**
@@ -34,13 +30,13 @@ class BookEvent implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        return[
-             new Channel('booking.'.$this->schedule)
+        return [
+            new PrivateChannel('adminBooking.'.$this->schedule),
         ];
     }
 
     public function broadcastAs()
     {
-        return 'book';
+        return 'admin.book';
     }
 }

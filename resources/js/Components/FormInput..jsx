@@ -15,7 +15,7 @@ const FormInput = ({label, name, placeholder, onChange, value, error}) => {
                     value={value}
                     id={name}
                     placeholder={placeholder}
-                    className='w-[20rem] h-8  bg-slate-700 border-none text-slate-00 '
+                    className='w-[30rem] h-8  bg-slate-700 border-none text-slate-00 '
                     />
                 </div>
 

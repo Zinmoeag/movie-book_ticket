@@ -12,42 +12,50 @@ class RoomLayout
             'A' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 1,
             ],
             'B' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 1,
             ],
             'C' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 2,
             ],
             'D' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 2,
             ],
             'E' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 2,
             ],
             'F' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 3,
             ],
             'G' => [
                 'seats' => 18,
                 'layout' => [4,10,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 3,
             ],
             'H' => [
                 'seats' => 6,
                 'layout' => [3,3],
-                'seat_type' => 'couple'
+                'seat_type' => 'couple',
+                'role' => 4,
             ]
         ]
     ];
@@ -57,42 +65,52 @@ class RoomLayout
             'A' => [
                 'seats' => 14,
                 'layout' => [3,8,3],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 1,
             ],
             'B' => [
                 'seats' => 20,
                 'layout' => [4,12,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 1,
             ],
             'C' => [
                 'seats' => 14,
                 'layout' => [3,8,3],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 2,
+                
             ],
             'D' => [
                 'seats' => 20,
                 'layout' => [4,12,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 2,
             ],
             'E' => [
                 'seats' => 20,
                 'layout' => [4,12,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 2,
             ],
             'F' => [
                 'seats' => 20,
                 'layout' => [4,12,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 3,
             ],
             'G' => [
                 'seats' => 20,
                 'layout' => [4,12,4],
-                'seat_type' => 'normal'
+                'seat_type' => 'normal',
+                'role' => 3,
+                
             ],
             'H' => [
                 'seats' => 9,
                 'layout' => [3,3,3],
-                'seat_type' => 'couple'
+                'seat_type' => 'couple',
+                'role' => 4,
             ]
         ]
     ];

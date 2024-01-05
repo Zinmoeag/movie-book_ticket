@@ -14,6 +14,7 @@ use Inertia\Inertia;
 use App\Utilities\Bookingdata;
 use App\Utilities\BookingHandling;
 use App\Events\BookEvent;
+use App\Events\AdminBookingEvent;
 
 class BookingController extends Controller
 {
@@ -35,7 +36,15 @@ class BookingController extends Controller
         
         $seats  = Seat::updateStatus($seatId, 1);
 
-        event(new BookEvent($seats->get()->toArray(), $schedule->slug));
+        event(new BookEvent(
+            $seats->get()->toArray(), 
+            $schedule->slug
+        ));
+
+        event(new AdminBookingEvent(
+            $schedule->slug, 
+            $booking->load('seats')
+        ));
     }
 
 
@@ -48,19 +57,16 @@ class BookingController extends Controller
 
         $seats = Seat::updateStatus($seatId, 2);
 
-        if(auth()->user()){
-            event(new BookEvent(
-                $seats->get()->toArray(), 
-                $schedule->slug, 
-                $booking->load('seats')
-            ));
-        }else{
-            event(new BookEvent(
-                $seats->get()->toArray(), 
-                $schedule->slug, 
-                null,
-            ));
-        }
+        event(new BookEvent(
+            $seats->get()->toArray(), 
+            $schedule->slug
+        ));
+
+        event(new AdminBookingEvent(
+            $schedule->slug, 
+            $booking->load('seats')
+        ));
+ 
         
     }
 

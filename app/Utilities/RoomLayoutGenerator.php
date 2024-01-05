@@ -34,6 +34,7 @@ class RoomLayoutGenerator extends RoomLayout
                 'schedule_id' => $this->scheduleId,
                 'seat_type' => $row['seat_type'],
                 'row' => $rowNo,
+                'role' => $row['role'],
                 'status' => 3,
             ]);
             

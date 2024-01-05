@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Broadcast;
 // });
 
 
-Broadcast::channel('booking.{schedule:slug}', function($user, $schedule){
-    dd($schedule);
+Broadcast::channel('adminBooking.{schedule}', function($user, string $schedule){
+    return $user->role === "admin";
 });

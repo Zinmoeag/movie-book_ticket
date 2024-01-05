@@ -35,13 +35,13 @@ const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
                                     </div>
                                 </div>
                                 <div className="mt-[8rem]">
-                                    <h3 className="mb-8 py-2 px-2 bg-slate-400">Seats</h3>
                                     <RoomSeat
                                     authUser={props.auth.user}
                                     seats={seats}
                                     room={room}
                                     schedule={schedule.slug}
                                     book_seat = {book_seat}
+                                    isAdminPage = {true}
                                     />
                                 </div>
 
@@ -55,6 +55,7 @@ const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
                                         room : 'Cinema-' + room.room_number, 
                                     }}
                                     action={schedule.slug}
+                                    adminPage={true}
                                     />
                                 </div>
                             </div>

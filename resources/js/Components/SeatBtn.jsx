@@ -14,11 +14,11 @@ const SeatBtn = ({ seat , showOptionMenu, seeInfo, modalTogle}) => {
     } = usePage();
 
     const {
-        setBooking, 
+        setBooking,
+        adminPage, 
         data,
-        showBookingInfo
+        showBookingInfo,
     } = useBooking();
-
 
     const [menuofBookBought, setMenuOfBookBought] = useState(null) 
 
@@ -26,17 +26,14 @@ const SeatBtn = ({ seat , showOptionMenu, seeInfo, modalTogle}) => {
         if(seat.status === 'avaliable'){
             setBooking(seat)
         }else if(seat.status === 'booked' || seat.status === 'bought'){
-
             if(user){
                 setMenuOfBookBought(seat.id)
                 if(menuofBookBought === seat.id){
                     setMenuOfBookBought(null)
                 }
             }
-            
         }
     }  
-
 
     return (
         <>
@@ -57,8 +54,8 @@ const SeatBtn = ({ seat , showOptionMenu, seeInfo, modalTogle}) => {
                 )}
                 </button>
                 
-                {user && menuofBookBought && menuofBookBought === seat.id && (
-                    <ul className="text-slate-800 absolute z-20 rounded-lg border-slate-800 border-2 bg-white w-[7rem] left-[100%] top-0">
+                {adminPage && menuofBookBought && menuofBookBought === seat.id && (
+                    <ul className="py-2 text-slate-800 absolute z-20 rounded-lg border-slate-800 border-2 bg-white w-[7rem] left-[100%] top-0">
                         <li className="px-4">
                             <button
                             type="button"
