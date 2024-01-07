@@ -21,7 +21,7 @@ class MovieController extends Controller
     public function show()
     {
         return Inertia::render('Welcome', [
-            'movies' => Movie::latest()->paginate(3),
+            'movies' => Movie::where('status', 'on_theatre')->latest()->paginate(3),
         ]);
     }
 

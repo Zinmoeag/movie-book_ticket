@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('movie');
-            $table->string('slug');
-            $table->string('release_date');
-            $table->string('duration');
-            $table->enum('status', ['on_theatre', 'comming_soon'])->default('comming_soon');
-            $table->string('movie_photo');
+            $table->string('token');
+            $table->unsignedBigInteger('chat_id');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('chats');
     }
 };

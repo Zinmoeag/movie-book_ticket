@@ -3,14 +3,15 @@ import Card from '../Components/Card'
 import {useRef, useEffect, useState} from 'react'
 import AppLayout from '../Layouts/AppLayout'
 
+// import { router } from '@inertiajs/react';
+import axios from 'axios';
+import Chat from '@/Features/Chat/Chat';
+
 export default function Welcome({ auth, movies }) {
 
     const scrollSectionRef = useRef(null);
     const [scrollInProgress, setScrollInProgress] = useState(false);
 
-    console.log(movies)
-
-    
     const handleScroll = (event) => {
         if(!scrollInProgress){
             const scrollSection = scrollSectionRef.current;
@@ -79,7 +80,7 @@ export default function Welcome({ auth, movies }) {
                 </div>
 
                 <div className='py-2 px-40' >
-                    <h3 className='text-2xl text-orange-400 font-bold uppercase py-4 border-b-2 border-blue-400'>Movies</h3>
+                    <h3 className='text-2xl text-yellow-400 font-bold uppercase py-4 border-b-2 border-blue-400'>On Theatre</h3>
 
                     <div className='flex gap-8 items-center justify-center py-6'>
 
@@ -96,8 +97,6 @@ export default function Welcome({ auth, movies }) {
                                     duration = {movie.duration}
                                 />
                             </Link>
-
-
                         ))}
 
                         
@@ -114,6 +113,11 @@ export default function Welcome({ auth, movies }) {
                             >
                             </Link>
                         ))}
+                    </div>
+
+                    
+                    <div className='fixed bottom-4 right-4 flex flex-col gap-2'>
+                        <Chat />
                     </div>
                 </div>
             </section>

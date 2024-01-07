@@ -36,6 +36,8 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
         initialLizeBookingUser(book_seat)
         initializePage(authUser, isAdminPage)
     },[])
+
+    console.log(adminPage, authUser)
     
 
 

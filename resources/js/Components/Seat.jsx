@@ -46,12 +46,12 @@ const Seat = ({seat, selected}) => {
                 <div className="h-[50px] flex flex-col items-center justify-center">
                     
                     <img 
-                    className="h-[40px]"
+                    className="h-[30px]"
                     src={seatImage(seat?.status, seat?.seat_type, seat?.role, selected)}
                     alt="" 
                     />
                     <p>
-                        {seat?.row + seat?.seat_number}
+                        { seat?.seat_number}
                     </p>
                 </div>
                 

@@ -26,7 +26,7 @@ class CinemaFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function (Cinema $cinema) {
-           \App\Models\Room::factory(5)->create(['cinema_id' => $cinema->id]);
+           \App\Models\Room::factory(5)->create(['cinema_id' => $cinema->id, 'room_type' => rand(1,2)]);
         });
     }
 }

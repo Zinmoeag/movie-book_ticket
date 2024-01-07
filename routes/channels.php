@@ -21,3 +21,7 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('adminBooking.{schedule}', function($user, string $schedule){
     return $user->role === "admin";
 });
+
+Broadcast::channel('chattingAdmin', function($user){
+    return true;
+});

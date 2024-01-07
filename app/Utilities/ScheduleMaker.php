@@ -30,10 +30,22 @@ class ScheduleMaker
         ]);
     }
 
+    public function changeStatus($movie)
+    {
+        if($movie->status != "on_theatre"){
+            $movie->status = 'on_theatre';
+            $movie->save();
+        }
+    }
+
     public function createSchedule($data)
     {
 
         $existedDate = $this->getExistedDate($data["date"], $data['time']);
+
+        $movie = Movie::find($data['movie_id']);
+
+        $this->changeStatus($movie);
 
         if($existedDate){
             $this->createScheduleSeat(

@@ -26,4 +26,12 @@ class Booking extends Model
     {
         return $this->belongsToMany(Seat::class);
     }
+
+    public function ddd(){
+        Booking::whereHas('schedule', function($query){
+            $query->whereHas('movie', function($query){
+                $query->where("id",1);
+            });
+        });
+    }
 }
