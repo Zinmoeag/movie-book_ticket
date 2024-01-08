@@ -3,9 +3,7 @@ import Card from '../Components/Card'
 import {useRef, useEffect, useState} from 'react'
 import AppLayout from '../Layouts/AppLayout'
 
-// import { router } from '@inertiajs/react';
-import axios from 'axios';
-import Chat from '@/Features/Chat/Chat';
+
 
 export default function Welcome({ auth, movies }) {
 
@@ -49,7 +47,9 @@ export default function Welcome({ auth, movies }) {
     return (
         <>
 
-        <AppLayout>
+        <AppLayout
+        authUser = {auth.user}
+        >
             <section 
             id="hero"
             style={{scrollSnapAlign: 'start'}}
@@ -116,9 +116,7 @@ export default function Welcome({ auth, movies }) {
                     </div>
 
                     
-                    <div className='fixed bottom-4 right-4 flex flex-col gap-2'>
-                        <Chat />
-                    </div>
+
                 </div>
             </section>
         </AppLayout>

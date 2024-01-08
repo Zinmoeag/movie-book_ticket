@@ -17,7 +17,7 @@ class AdminSendMessageEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(public $message)
+    public function __construct(public $message,public $senderId)
     {
         //
     }
@@ -30,12 +30,12 @@ class AdminSendMessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('chattingAdmin'),
+            new PrivateChannel('chatting.admin.'.$this->senderId),
         ];
     }
 
     public function broadcastAs()
     {
-        return 'admin.send.message';
+        return 'admin_send_message';
     }
 }

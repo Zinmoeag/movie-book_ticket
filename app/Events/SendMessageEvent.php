@@ -17,7 +17,7 @@ class sendMessageEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(private $sessionToken, public $message)
+    public function __construct(private $userId, public $message)
     {
         //
     }
@@ -30,7 +30,7 @@ class sendMessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('chatting.'.$this->sessionToken),
+            new PrivateChannel('chatting.'.$this->userId),
         ];
     }
 

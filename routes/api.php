@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\ChatController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +31,4 @@ Route::get('/ii', function () {
     ]);
 });
 
-Route::post('/chat/admin', function () {
-    return response()->json([
-        'stes' => request()->all()
-    ]);
-});
+

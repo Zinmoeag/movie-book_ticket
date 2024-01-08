@@ -62,7 +62,12 @@ Route::get('/admin/cinema/new', [CinemaController::class, 'create'])->name('admi
 Route::post('/admin/cinema/new', [CinemaController::class, 'store'])->name('admin.cinema.store');
 
 Route::get('/admin/chat', [ChatController::class, 'index'])->name('admin.chat');
+Route::get('/admin/chat/{user}', [ChatController::class, 'chatUser'])->name('admin.chat.user');
+Route::get('/chat/{user}',[ChatController::class, 'showUserChat'])->name('chat.user.show');
+Route::post('/admin/chat/{user}', [ChatController::class, 'adminSend']);
 
 Route::post('/buy/{schedule:slug}', [BookingController::class, 'buy'])->name("buy.post");
+
+Route::post('/chat/admin/{sender}', [ChatController::class, 'userSend']);
 
 require __DIR__.'/auth.php';

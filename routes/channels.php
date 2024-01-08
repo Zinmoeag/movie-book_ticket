@@ -22,6 +22,11 @@ Broadcast::channel('adminBooking.{schedule}', function($user, string $schedule){
     return $user->role === "admin";
 });
 
-Broadcast::channel('chattingAdmin', function($user){
-    return true;
+Broadcast::channel('chatting.admin.{sender}', function($user){
+    return $user->role === "admin";
 });
+
+Broadcast::channel('chatting.{id}', function($user, $id){
+    return (int) $user->id === (int) $id;
+});
+
