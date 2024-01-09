@@ -14,5 +14,6 @@ class message extends Model
         'sender_id',
         'message_id',
         'message',
+        'status',
     ];    
 }

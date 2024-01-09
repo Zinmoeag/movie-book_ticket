@@ -2,18 +2,30 @@ import { useState } from "react";
 
 const useChatState = () => {
 
-    const [conservation, setConservation] = useState([]);
+    const [conservation, setConservation] = useState({});
+    const [pending, setPending] = useState({});
 
     const initializeConservation = (conservation) => {
         setConservation(conservation)
     }
 
-    const addMessage = (message) => {
+    // console.log(conservation)
+
+    const addMessage = (key, message) => {
         setConservation(prev => {
-            return [
-                message,
+           return {
+                [key]: message,
                 ...prev,
-            ]
+            };
+        })
+    }
+
+    const addDelieverMessage = (message) => {
+        setConservation(prev => {
+           return {
+                ...prev,
+                [message.message_id]: message,
+            };
         })
     }
 
@@ -21,6 +33,7 @@ const useChatState = () => {
         conservation,
         initializeConservation,
         addMessage,
+        addDelieverMessage,
     }
 
 }

@@ -37,9 +37,13 @@ class ChatController extends Controller
         ->limit(10)
         ->get();
 
+        // dd($message);
+
+        // dd($this->messageHandling->makeMessageArray($message,'deliever'));
+
         return response()->json([
-            'conservation' => $message,
-            'message' => 'dd'
+            'conservation' => $this->messageHandling->getMessage($message),
+            'message' => $message
         ]);
     }
 
@@ -53,39 +57,29 @@ class ChatController extends Controller
     public function userSend($sender)
     {
         $cleanData = request()->validate([
-            'message' => 'required'
+            'message' => 'required',
+            'uuId' => 'required',
         ]);
 
-        //generate token
-        $messageId = time() . '_' . rand(1000, 9999);
 
-        // send message event
-        $msg = [
-            'id' => '',
-            'receiver_id' => 1,
-            'message_id' => $messageId,
-            'sender_id' => $sender,
-            'message' => $cleanData['message'],
-            'status' => 'send'
-        ];
-
-        event(new AdminSendMessageEvent($msg, $sender ));
         //store in db
-        //send message deliever event
-        
-
         $message = Message::create([
             'receiver_id' => 1,
             'sender_id' => auth()->user()->id,
-            'message_id' => $messageId,
-            'message' => $cleanData['message']
+            'message_id' => $cleanData['uuId'],
+            'message' => $cleanData['message'],
+            'status' => 'deliever'
         ]);
 
-        event(new SendMessageEvent( $sender,$message, ));
+        //send message deliever event
+        event(new AdminSendMessageEvent($message, $sender));
 
+        return response()->json([
+            'message' => $message
+        ]);
+        
+        // event(new SendMessageEvent( $sender,$message, ));
 
-
-    
     }
 
     public function adminSend(User $user)

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('message_id')->unique();
             $table->foreignId('receiver_id');
             $table->string('message');
+            $table->enum('status', ['deliever', 'send'])->default('deliever');
             $table->timestamps();
         });
     }
