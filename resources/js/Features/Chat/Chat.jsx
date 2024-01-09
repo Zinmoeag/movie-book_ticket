@@ -5,6 +5,7 @@ import { useForm, usePage } from '@inertiajs/react';
 import Message from './Partials/Message';
 import { useChat } from '@/Context/Chat/ChatContext';
 import '../../../css/scroll.css'
+
 import { divide } from 'lodash';
 
 const Chat = ({authUser}) => {
@@ -36,15 +37,12 @@ const Chat = ({authUser}) => {
         loading : false,
     })
 
-    // console.log(conservation)
-
 
     const chatChannel = window.Echo.private(`chatting.${authUser?.id}`);
 
     useEffect(() => {
         chatChannel.listen('.send_message', function (data) {
-            // console.log(data)
-            addMessage(data.message)
+            addMessage(data.message.message_id,{...data.message})
         })
     },[chatChannel])
 
@@ -64,7 +62,7 @@ const Chat = ({authUser}) => {
             ...fetcheingStatus,
             loading : true,
         });
-        axios.get('/chat/2')
+        axios.get(`/chat/${authUser.id}`)
             .then(res => {
                 setFetcheingStatus({
                     ...fetcheingStatus,
@@ -86,8 +84,9 @@ const Chat = ({authUser}) => {
             message : data.message,
             status : 'send'
         })
-        
 
+        reset()
+        
         axios.post(`/chat/admin/${authUser.id}`,{...data})
             .then(res => {
                 reset();

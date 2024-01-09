@@ -1,4 +1,4 @@
-const User = () => {
+const User = ({name, message}) => {
     return (
         <>
         <div className="bg-slate-700 rounded-lg mx-2 my-2">
@@ -11,8 +11,8 @@ const User = () => {
                 />
 
                 <div className="w-[15rem] px-2">
-                    <h3>Name</h3>
-                    <p className="text-sm text-slate-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h3>{name}</h3>
+                    <p className="text-sm text-slate-400">{message}</p>
                 </div>
             </div>
         </div>

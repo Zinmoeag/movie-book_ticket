@@ -22,7 +22,7 @@ Broadcast::channel('adminBooking.{schedule}', function($user, string $schedule){
     return $user->role === "admin";
 });
 
-Broadcast::channel('chatting.admin.{sender}', function($user){
+Broadcast::channel('chatting.admin', function($user){
     return $user->role === "admin";
 });
 

@@ -17,7 +17,7 @@ class sendMessageEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(private $userId, public $message)
+    public function __construct(public $userId, public $message)
     {
         //
     }

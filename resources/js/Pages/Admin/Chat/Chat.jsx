@@ -1,47 +1,37 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import ChatBar from "./Partials/ChatBar";
 import { useEffect } from "react";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import User from "./Partials/User";
+import Conservation from "./Partials/Conservation";
+import { ChatProvider } from "@/Context/Chat/ChatContext";
 
-const Chat = ({user_id}) => {
+const Chat = ({receiver, recent_users, conservation}) => {
+
     const {props} = usePage();
-
-    const adminChatChannel = window.Echo.private(`chatting.admin.3`);
-
-    useEffect(() => {
-        adminChatChannel.listen('.admin_send_message', function(data){
-            console.log(data)
-        })
-    },[adminChatChannel])
 
     return (
         <>
         <AdminLayout>
-            <div className="text-white flex">
-                <div 
-                id="chat-area"
-                className="flex flex-col w-full"
-                style={{
-                    height : 'calc(100vh - 4rem)'
-                }}
-                >
-                    <div id="chat-message" className="flex-1 bg-slate-950">
-
+            <ChatProvider>
+                <div className="text-white flex">
+                    <Conservation
+                    conservationData={conservation}
+                    receiver={receiver} 
+                    />
+                    <div id='chat_users' className="w-[25rem]">
+                        {recent_users && recent_users.map(user => (
+                            <Link href={`/admin/chat/${user.user_id}`}>
+                                <User
+                                name={user.name}
+                                message = {user.message}
+                                />
+                            </Link>
+                        ))}
                     </div>
 
-                    <ChatBar
-                    userId={user_id} 
-                    />
-
                 </div>
-
-                <div id='chat_users' className="w-[25rem]">
-
-                    <User />
-
-                </div>
-            </div>
+            </ChatProvider>
         </AdminLayout>
         </>
     )

@@ -68,7 +68,6 @@ export default function AdminLayout({children}){
                                     <MenuDropDown 
                                         menu = {[
                                             {id:1,name: "Chats", link : route('admin.chat')},
-                                            {id:2,name: "New Room", onClick : () => console.log('dd') }
                                         ]}
                                         display={"Chat"}
                                     />

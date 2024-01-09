@@ -3,13 +3,13 @@ import { useState } from "react";
 const useChatState = () => {
 
     const [conservation, setConservation] = useState({});
-    const [pending, setPending] = useState({});
+    // const [pending, setPending] = useState({});
 
     const initializeConservation = (conservation) => {
         setConservation(conservation)
     }
 
-    // console.log(conservation)
+    console.log(conservation)
 
     const addMessage = (key, message) => {
         setConservation(prev => {

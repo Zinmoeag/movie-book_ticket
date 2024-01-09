@@ -24,7 +24,7 @@ const Message = ({sender, message}) => {
                 <div id='message' className={`text-sm justify-end justify-items-end shadow-md px-2 py-2 rounded-lg ${isSenderColor()}`}>
                     <p>{message.message}</p>
                 </div>
-                {sender && message.status === "deliever" ? (                
+                {message.status === "deliever" ? (                
                     <FontAwesomeIcon 
                     icon={faCircleCheck}
                     className='text-[0.6rem]' 

@@ -61,7 +61,7 @@ Route::put('/admin/schedule/update/room/{schedule:slug}', [ScheduleController:: 
 Route::get('/admin/cinema/new', [CinemaController::class, 'create'])->name('admin.cinema.create');
 Route::post('/admin/cinema/new', [CinemaController::class, 'store'])->name('admin.cinema.store');
 
-Route::get('/admin/chat', [ChatController::class, 'index'])->name('admin.chat');
+Route::get('/admin/chat', [ChatController::class, 'chatUser'])->name('admin.chat');
 Route::get('/admin/chat/{user}', [ChatController::class, 'chatUser'])->name('admin.chat.user');
 Route::get('/chat/{user}',[ChatController::class, 'showUserChat'])->name('chat.user.show');
 Route::post('/admin/chat/{user}', [ChatController::class, 'adminSend']);

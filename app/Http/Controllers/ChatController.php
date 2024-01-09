@@ -9,16 +9,20 @@ use App\Events\SendMessageEvent;
 use App\Models\Message;
 use App\Models\User;
 use App\Utilities\MessageHandling;
+use App\Utilities\ChatHandler;
+use Illuminate\Support\Facades\DB;
 
 
 class ChatController extends Controller
 {
 
     private $messageHandling;
+    private $chatHandler;
 
     public function __construct()
     {
         $this->messageHandling = new MessageHandling();
+        $this->chatHandler = new ChatHandler();
     }
 
     public function index()
@@ -28,29 +32,23 @@ class ChatController extends Controller
 
     public function showUserChat (User $user)
     {
-
-        $message = Message::where(function($query) use($user) {
-            $query->where('sender_id', $user->id)
-                  ->orWhere('receiver_id', $user->id);
-        })
-        ->latest()
-        ->limit(10)
-        ->get();
-
-        // dd($message);
-
-        // dd($this->messageHandling->makeMessageArray($message,'deliever'));
+        // $this->messageHandling->fetchMessage()
 
         return response()->json([
-            'conservation' => $this->messageHandling->getMessage($message),
-            'message' => $message
+            'conservation' => $this->messageHandling->fetchMessages($user->id),
+            // 'message' => $message
         ]);
     }
 
     public function chatUser(User $user)
     {
+
+        $recentUser = $this->chatHandler->getRecentUser(auth()->user()->id);
+
         return Inertia::render('Admin/Chat/Chat',[
-            'user_id' => $user->id
+            'receiver' => $user,
+            'recent_users' => $recentUser,
+            'conservation' => $this->messageHandling->fetchMessages($user->id),
         ]);
     }
 
@@ -60,7 +58,6 @@ class ChatController extends Controller
             'message' => 'required',
             'uuId' => 'required',
         ]);
-
 
         //store in db
         $message = Message::create([
@@ -85,16 +82,24 @@ class ChatController extends Controller
     public function adminSend(User $user)
     {
         $cleanData = request()->validate([
-            'message' => 'required'
+            'message' => 'required',
+            'uuId' => 'required',
         ]);
         
         $message = Message::create([
             'receiver_id' => $user->id,
+            'message_id' => $cleanData['uuId'],
             'sender_id' => 1,
+            'status' => 'deliever',
             'message' => $cleanData['message']
         ]);
 
-        event(new SendMessageEvent(3, $message));
+        event(new SendMessageEvent($user->id, $message));
+
+        return response()->json([
+            'message' => $message
+        ]);
+        
 
     }
 }
