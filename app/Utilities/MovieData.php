@@ -14,7 +14,6 @@ class MovieData
                 'id' => $item->id,
                 'name' => $item->movie,
                 'value' => $item[$valueType],
-
             ];
         });
 

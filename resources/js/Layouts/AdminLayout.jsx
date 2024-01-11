@@ -57,7 +57,7 @@ export default function AdminLayout({children}){
                                     <MenuDropDown 
                                         menu = {[
                                             {id:1,name: "New Cinema", link : route('admin.cinema.create')},
-                                            {id:2,name: "New Room", onClick : () => console.log('dd') }
+                                            {id:2,name: "New Room", link : route('admin.room.create')}
                                         ]}
                                         display={"Cinema"}
                                     />

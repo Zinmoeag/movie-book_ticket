@@ -9,8 +9,6 @@ const useChatState = () => {
         setConservation(conservation)
     }
 
-    console.log(conservation)
-
     const addMessage = (key, message) => {
         setConservation(prev => {
            return {
@@ -29,11 +27,16 @@ const useChatState = () => {
         })
     }
 
+    const resetConservation = () => {
+        setConservation({})
+    }
+
     return {
         conservation,
         initializeConservation,
         addMessage,
         addDelieverMessage,
+        resetConservation,
     }
 
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,8 @@ Route::put('/admin/schedule/update/movie/{schedule:slug}', [ScheduleController::
 Route::put('/admin/schedule/update/room/{schedule:slug}', [ScheduleController:: class, "updateSeat"])->name('admin.schedule.update.room');
 Route::get('/admin/cinema/new', [CinemaController::class, 'create'])->name('admin.cinema.create');
 Route::post('/admin/cinema/new', [CinemaController::class, 'store'])->name('admin.cinema.store');
+Route::get('/admin/room/new', [RoomController::class, 'create'])->name('admin.room.create');
+// Route::post('/admin/cinema/new', [CinemaController::class, 'store'])->name('admin.cinema.store');
 
 Route::get('/admin/chat', [ChatController::class, 'chatUser'])->name('admin.chat');
 Route::get('/admin/chat/{user}', [ChatController::class, 'chatUser'])->name('admin.chat.user');

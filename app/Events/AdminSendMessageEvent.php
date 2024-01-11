@@ -30,7 +30,7 @@ class AdminSendMessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('chatting.admin'),
+            new PrivateChannel('chatting.admin.'.$this->senderId),
         ];
     }
 

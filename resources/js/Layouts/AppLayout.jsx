@@ -11,7 +11,7 @@ export default function AppLayout({children, authUser}){
                 <section 
                 className='bg-slate-800 text-white'
                 >
-                    <div className='h-[6rem] bg-violet-800 flex items-center px-20'>
+                    <div className='h-[6rem] bg-blue-900 flex items-center px-20'>
                         <Link href="/">
                             <h3 className='text-white uppercase font-bold text-2xl '>
                                 Cinephile

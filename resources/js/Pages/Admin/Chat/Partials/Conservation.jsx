@@ -21,7 +21,7 @@ const Conservation = ({receiver, conservationData}) => {
         }
     } = usePage()
 
-    const adminChatChannel = window.Echo.private(`chatting.admin`);
+    const adminChatChannel = window.Echo.private(`chatting.admin.${receiver.id}`);
 
     useEffect(() => {
         adminChatChannel.listen('.admin_send_message', function(data){
@@ -59,20 +59,23 @@ const Conservation = ({receiver, conservationData}) => {
                     <div id="chat-message" className="flex-1 bg-slate-950">
                         {receiver?.id ? (
                             <>
-                                {conservation && Object.entries(conservation).map(([key, message]) => (
-                                    <div id='message-area' 
-                                    className='px-2 py-2 w-full h-[20rem] flex flex-col-reverse gap-2 overflow-y-scroll scroll'
-                                    style={{
-                                        height : 'calc(100vh - 14rem)'
-                                    }}
-                                    >
+                                <div id='message-area' 
+                                className='px-2 py-2 w-full flex flex-col-reverse gap-2 overflow-y-scroll scroll'
+                                style={{
+                                    height : 'calc(100vh - 14rem)'
+                                }}
+                                >
+                                    {conservation ? Object.entries(conservation).map(([key, message]) => (
                                         <Message
                                         key={key}
                                         sender={user.id === message.sender_id}
                                         message={message}
                                         />
-                                    </div>
-                                ))}
+                                    )) : (
+                                        <div className="py-6 px-6 text-center">Say Hi</div>
+                                    )}
+                                </div>
+                               
                             </>
                         ) : (
                             <div className="py-6">

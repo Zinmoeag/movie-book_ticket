@@ -4,10 +4,20 @@ import BookingForm from '@/Components/BookingForm';
 import { BookingProvider } from '@/Context/BookingContext/BookingContext';
 import { SeatProvider } from '@/Context/SeatContext/SeatContext';
 import { DropMenuProvider } from '@/Context/DropMenu/DropMenu';
+import { usePage } from '@inertiajs/react';
 
 
 
-const ScheduleRoom = ({seats, schedule, room, movie, date, user, price}) => {
+const ScheduleRoom = ({seats, schedule, room, movie, date, price}) => {
+
+
+    const {
+        props : {
+            auth : {user}
+        }
+    } = usePage()
+
+    // console.log(user)
 
     const roleColorGenerator = (role) => {
         if(role === 'front'){
@@ -23,7 +33,9 @@ const ScheduleRoom = ({seats, schedule, room, movie, date, user, price}) => {
 
     return (
         <>
-            <AppLayout>
+            <AppLayout
+            authUser = {user}
+            >
                 <BookingProvider>
                     <SeatProvider>
                             <div className='px-16 py-4'>

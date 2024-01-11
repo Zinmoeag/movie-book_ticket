@@ -36,7 +36,6 @@ class ChatController extends Controller
 
         return response()->json([
             'conservation' => $this->messageHandling->fetchMessages($user->id),
-            // 'message' => $message
         ]);
     }
 
