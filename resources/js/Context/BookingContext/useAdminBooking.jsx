@@ -1,6 +1,13 @@
 import { useState } from "react";
+import { useForm } from "@inertiajs/react";
 
 const useAdminBooking = () => {
+
+    const {
+        data,
+        setData,
+        delete: destroy
+    } = useForm()
 
     const [adminPage, setAdminPage] = useState(false);
 
@@ -10,9 +17,16 @@ const useAdminBooking = () => {
         }
     }
 
+    const destroyBooking = (url) => {
+        destroy(url)
+    }
+
+    
+
     return {
         adminPage, 
         initializePage,
+        destroyBooking,
     }
 }
 

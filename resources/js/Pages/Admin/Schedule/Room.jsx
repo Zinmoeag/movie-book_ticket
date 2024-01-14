@@ -8,7 +8,7 @@ import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 
 
-const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
+const Room = ({ book_seat, seats, room, schedule, movie, date, available_seat }) => {
 
     const {props} = usePage();
 
@@ -28,13 +28,17 @@ const Room = ({ book_seat, seats, room, schedule, movie, date }) => {
                                         <div>
                                             <p>Avaliabe Seat -
                                                 <span className="text-green-400">
-                                                    heysa
+                                                    {available_seat}
                                                 </span>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt-[8rem]">
+                                    <div className="px-20 my-8">
+                                        <h3 className="text-yellow-400 font-bold uppercase text-2xl">Here is the List of Seats</h3>
+                                        <p className="text-slate-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae excepturi dolore nemo! Omnis maiores impedit possimus quae animi. Temporibus eveniet fuga suscipit labore reprehenderit quidem maiores neque hic necessitatibus dignissimos?</p>
+                                    </div>
                                     <RoomSeat
                                     authUser={props.auth.user}
                                     seats={seats}

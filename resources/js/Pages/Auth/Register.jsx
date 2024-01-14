@@ -1,51 +1,36 @@
-import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import withAuthLogic from "./GuessLayout"
 
-export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    });
-
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
-
+const Register = ({form}) => {
+   
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        form.post(route('register'));
     };
 
     return (
-        <GuestLayout>
-            <Head title="Register" />
-
+        <div className='bg-white px-6 py-8 rounded-lg w-[30rem]'>
+            <h3 className='uppercase text-[3rem] text-slate-950 pb-4'>Login</h3>
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
+                        value={form.data.name}
+                        className="mt-1 block w-full text-slate-900"
                         autoComplete="name"
                         isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => form.setData('name', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={form.errors.name} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -55,14 +40,14 @@ export default function Register() {
                         id="email"
                         type="email"
                         name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
+                        value={form.data.email}
+                        className="mt-1 block w-full text-slate-900"
                         autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => form.setData('email', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={form.errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -72,14 +57,14 @@ export default function Register() {
                         id="password"
                         type="password"
                         name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
+                        value={form.data.password}
+                        className="mt-1 block w-full text-slate-900"
                         autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
+                        onChange={(e) => form.setData('password', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={form.errors.password} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -89,14 +74,14 @@ export default function Register() {
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        value={form.data.password_confirmation}
+                        className="mt-1 block w-full text-slate-900"
                         autoComplete="new-password"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                        onChange={(e) => form.setData('password_confirmation', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError message={form.errors.password_confirmation} className="mt-2" />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
@@ -107,11 +92,14 @@ export default function Register() {
                         Already registered?
                     </Link>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton className="ms-4" disabled={form.processing}>
                         Register
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </div>
     );
 }
+
+
+export default withAuthLogic(Register);

@@ -1,4 +1,4 @@
-const SelectInput = ({label, onChange, defaultSelected, options}) => {
+const SelectInput = ({label, onChange, defaultSelected, options, error}) => {
     return (
         <>
             <div id='select' className="flex flex-col">
@@ -17,6 +17,10 @@ const SelectInput = ({label, onChange, defaultSelected, options}) => {
                         </option>
                     ))}
                 </select>
+            </div>
+
+            <div>
+                <p className="text-red-500">{error && error}</p>
             </div>
         </>
     )

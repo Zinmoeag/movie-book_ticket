@@ -37,7 +37,6 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
         initializePage(authUser, isAdminPage)
     },[])
 
-
     //channel handling
     useEffect(() => {
         channel.getBookingChannel(schedule).listen('.book', function(data) {
@@ -67,7 +66,11 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
         setIsModalShow(!isModalShow)
     }
 
-    let roomLayout = SeatLayoutGenerator(room.room_type);
+    let roomLayout = SeatLayoutGenerator(room.room_type)
+
+    console.log(filterByTypeAndRow(seatsObj.seats))
+
+    console.log(seats)
 
     return (
         <>
@@ -83,7 +86,7 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
                                 <span className={roleColorGenerator(seats[0].role) + ' font-bold px-4 text-green-400'}>{row}</span>
                                 <li>
                                     <SeatZone
-                                        rowLayout = {roomLayout[key]?.layout[i] || []}
+                                        rowLayout = {roomLayout[key]?.layout[row] || []}
                                         seatRow = {seats}
                                         modalTogle = {handleModal}
                                     />

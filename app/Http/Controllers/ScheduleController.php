@@ -18,8 +18,6 @@ use App\Utilities\MovieRooms;
 use Carbon\Carbon;
 use App\Utilities\SeatsMaker;
 
-
-
 class ScheduleController extends Controller
 {
 
@@ -149,23 +147,19 @@ class ScheduleController extends Controller
     {
         $scheduleSeats = new SeatsMaker($schedule->seats);
 
-        // $seatId = 259;
-
         $requestSeatId = request()->input('seat_id');
 
-        // dd($requestSeatId);
         $seat = Seat::find($requestSeatId);
         $bookingInfo = $seat ? $seat->bookings()->with('seats')->first() : null;
 
-        // dd($schedule->bookings->load('seats'));
-
         return Inertia::render($this->adminRoute('Room'),[
             'schedule' => $schedule,
-            'seats' => $schedule->seats,
+            'seats' =>$scheduleSeats->get(),
             'room' => $schedule->room->load(['cinema']),
             'movie' => $schedule->movie,
             'date' => $schedule->date,
-            'book_seat'=>$schedule->bookings->load('seats')
+            'book_seat'=>$schedule->bookings->load('seats'),
+            'available_seat' => $scheduleSeats->availableSeat(),
         ]);
     }
 

@@ -19,8 +19,18 @@ export default function AdminLayout({children}){
                     >  
 
                         <div className="py-2">
+
+
     
                             <ul className="text-yellow-200 text-sm">
+                                <li className="text-white uppercase py-2 text-left px-2 font-bold text-xl">
+                                    <Link 
+                                    href="/admin"
+                                    className="hover:text-yellow-400"
+                                    >
+                                        DashBoard
+                                    </Link>
+                                </li>
                                 <li className="">
                                     <MenuDropDown 
                                         menu = {[
@@ -46,8 +56,7 @@ export default function AdminLayout({children}){
                                 <li className="">
                                     <MenuDropDown 
                                         menu = {[
-                                            {id:1,name: "New Cinema", link : route('admin.cinema.create')},
-                                            {id:2,name: "New Room", onClick : () => console.log('dd') }
+                                            {id:1,name: "Booking", link : route('admin.booking')},
                                         ]}
                                         display={"Booking"}
                                     />

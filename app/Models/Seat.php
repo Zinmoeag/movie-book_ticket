@@ -9,6 +9,15 @@ class Seat extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'schedule_id',
+        'seat_type',
+        'row',
+        'role',
+        'status',
+        'seat_number',
+    ];
+
     public function Seat()
     {
         return $this->belongsTo(Scheduleg::class);

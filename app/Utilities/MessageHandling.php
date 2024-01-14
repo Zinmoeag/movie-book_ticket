@@ -8,18 +8,16 @@ class MessageHandling
 {
    public function getMessage($messages)
     {
-        // Convert the collection to an array
+
         $messagesArray = $messages->toArray();
 
-        // Initialize an empty array to store the result
         $result = [];
 
-        // Map over the array to create the associative arrays
+
         foreach ($messagesArray as $message) {
-            // Use the message_id as the key
+          
             $key = $message['message_id'];
             
-            // Create the associative array using the makeMessageArray function
             $result[$key] = $this->makeMessageArray((object) $message);
         }
 

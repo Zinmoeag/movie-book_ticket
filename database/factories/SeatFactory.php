@@ -24,7 +24,6 @@ class SeatFactory extends Factory
             'seat_number' => self::$number++,
             'seat_type' => 'normal',
             'row' => 'A',
-            'price_id' => 1,
             'status' => "avaliable",
         ];
     }

@@ -30,13 +30,16 @@ class RoomLayoutGenerator extends RoomLayout
         foreach($this->room['seats'] as $rowNo => $row)
         {
 
-            Seat::factory($row['seats'])->create([
-                'schedule_id' => $this->scheduleId,
-                'seat_type' => $row['seat_type'],
-                'row' => $rowNo,
-                'role' => $row['role'],
-                'status' => 3,
-            ]);
+            foreach(range(1, $row['seats']) as $seatNo){
+                Seat::create([
+                    'schedule_id' => $this->scheduleId,
+                    'seat_type' => $row['seat_type'],
+                    'row' => $rowNo,
+                    'role' => $row['role'],
+                    'status' => 3,
+                    'seat_number' => $seatNo ,
+                ]);
+            }
             
         }
         return $this->room;

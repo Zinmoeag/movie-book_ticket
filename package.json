@@ -23,10 +23,12 @@
         "@fortawesome/fontawesome-svg-core": "^6.5.1",
         "@fortawesome/free-solid-svg-icons": "^6.5.1",
         "@fortawesome/react-fontawesome": "^0.2.0",
+        "chart.js": "^4.4.1",
         "laravel-echo": "^1.15.3",
         "leaflet": "^1.9.4",
         "lodash": "^4.17.21",
         "pusher-js": "^8.4.0-rc2",
+        "react-chartjs-2": "^5.2.0",
         "react-image-crop": "^11.0.1",
         "react-leaflet": "^4.2.1"
     }

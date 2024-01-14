@@ -25,6 +25,11 @@ class MovieController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('Admin/Movie/Create');
+    }
+
     public function AdminIndex()
     {   
         return $this->latestMovies('Admin/Movie/Movie');

@@ -5,9 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class room extends Model
+class Room extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'room_number',
+        'room_type',
+        'cinema_id',
+        'total_seats',
+    ];
 
     public function movies()
     {

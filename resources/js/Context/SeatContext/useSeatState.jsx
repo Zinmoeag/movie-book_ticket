@@ -9,9 +9,6 @@ const useBookingState = () => {
         seats : [], 
   });
 
-
-
-
   const [newSeats, setNewSeats] = useState([]) 
 
 

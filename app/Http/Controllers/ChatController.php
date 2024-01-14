@@ -12,7 +12,6 @@ use App\Utilities\MessageHandling;
 use App\Utilities\ChatHandler;
 use Illuminate\Support\Facades\DB;
 
-
 class ChatController extends Controller
 {
 

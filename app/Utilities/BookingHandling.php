@@ -4,6 +4,7 @@ namespace App\Utilities;
 
 use App\Models\Booking;
 use App\Models\Seat;
+use App\Models\Price;
 
 class BookingHandling 
 {
@@ -14,13 +15,13 @@ class BookingHandling
             return $seat['id'];
         })->toArray();
     }
-    public function storeRecord($data, $schedule, $seatId)
+    public function storeRecord($data, $schedule, $seatId, $action)
     {   
         $bookingSeats = Seat::whereIn('id', $seatId)->get();
 
         $totalPrice = 0;
         foreach($bookingSeats as $seat){
-            $totalPrice += $seat->price->price;
+            $totalPrice += Price::where('role', $seat->role)->first()->price;
         }
 
         $booking = Booking::create([
@@ -28,6 +29,7 @@ class BookingHandling
             'user_phone' => $data['phone'],
             'user_email' => $data['email'],
             'schedule_id' => $schedule->id,
+            'status' => $action,
             'price' => $totalPrice
         ]);
 

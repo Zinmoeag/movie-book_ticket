@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('row');
             $table->enum('role', ['front', 'mid', 'back', 'couple'])->default('front');
             $table->enum('status', ['booked', 'bought', 'avaliable'])->default('avaliable');
-            $table->foreignId('price_id')->unsigned();
             $table->timestamps();
         });
     }

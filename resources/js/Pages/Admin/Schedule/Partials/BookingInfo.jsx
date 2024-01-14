@@ -1,9 +1,11 @@
+import { Link } from "@inertiajs/react"
+
 const BookingInfo = ({bookingInfo}) => {
 
     return (
         <>
             <section>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-2 my-6">
                     <li className="uppercase text-[4rem] text-yellow-400">
                         {bookingInfo.seats[0].status}!
                     </li>
@@ -26,6 +28,13 @@ const BookingInfo = ({bookingInfo}) => {
                         Total Price : {bookingInfo.price}
                     </li>
                 </ul>
+                <Link
+                only={['booking']}
+                href={route('admin.booking')}
+                data={{booking_id : bookingInfo.id}} 
+                className="px-6 py-2 my-6 bg-blue-600">
+                   Go to Booking
+                </Link>
             </section>
         </>
     )
