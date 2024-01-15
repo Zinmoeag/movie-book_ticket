@@ -2,6 +2,9 @@ import { Link, Head } from '@inertiajs/react';
 import Card from '../Components/Card'
 import {useRef, useEffect, useState} from 'react'
 import AppLayout from '../Layouts/AppLayout'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faXTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 
 
 
@@ -69,14 +72,6 @@ export default function Welcome({ auth, movies }) {
                 <div className='text-white bg-gradient-to-r from-rose-600 to-amber-400 px-20 py-2'>
                     <h3>Welcome to Cinephile</h3>
                     <h3 className='uppercase text-2xl font-bold py-2'>what are you looking for?</h3>
-
-                    <form>
-                        <input
-                            type='text'
-                            className='bg-white w-full border-none text-slate-600 outline-none pt-4 text-lg border-none'
-                            placeholder='Searh for a movie'
-                        />
-                    </form>
                 </div>
 
                 <div className='py-2 px-40' >
@@ -114,8 +109,6 @@ export default function Welcome({ auth, movies }) {
                             </Link>
                         ))}
                     </div>
-
-                    
 
                 </div>
             </section>

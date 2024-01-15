@@ -1,4 +1,4 @@
-import { forEach } from "lodash";
+import { forEach, get } from "lodash";
 import { useState } from "react"
 
 
@@ -6,11 +6,12 @@ const useBookingState = () => {
 
   const [seatsObj, setSeatsObj ] = useState({
         avaliable_seat : "",
-        seats : [], 
+        seats : {}, 
   });
 
-  const [newSeats, setNewSeats] = useState([]) 
+  // console.log(seatsObj?.seats)
 
+  const [newSeats, setNewSeats] = useState([]) 
 
 
   const initialLizeSeats = (seats) => {
@@ -21,6 +22,22 @@ const useBookingState = () => {
           seats : seats
         }}
       )
+  }
+
+  const getAddedBookedSeats = (seats) => {
+    let obj = seatsObj.seats;
+    
+    seats.forEach(seat => {
+      let typeVar = obj[seat.seat_type] || null;
+      let rowVar  = typeVar ? typeVar[seat.row].seats : null;
+      let idVar = rowVar ? rowVar[seat.id] : null ;
+      
+      if(typeVar && rowVar && idVar){
+        return obj[seat.seat_type][seat.row].seats[seat.id] = seat;
+      }
+    })
+
+    return obj;
   }
 
 
@@ -35,24 +52,25 @@ const useBookingState = () => {
     return newLiveSeats;
   }
 
-    const updateSeat = (newSeats) => {
-
-        const existingSeatsObj = newSeats.reduce((acc, seat) => {
-          acc[seat.id] = seat;
-          return acc;
-        }, {});
-        
-        
+  const updateSeat = (newSeats) => {
+      let modifiedData = getAddedBookedSeats(newSeats)
+      
         setSeatsObj(prev => {
-          const updatedSeats = prev.seats.map(seat => existingSeatsObj[seat.id] || seat)
-
-          
             return {
                 ...prev,
-                seats : updatedSeats,
+                seats : modifiedData,
             }
         })
   }
+
+  const cancleBooking = (seatIds) => {
+    let modifiedData = seatsObj.seats;
+
+    // seatIds.forEach(id => )
+  }
+
+
+  // const idi = [121, 123]
 
   const groupBy = (xs, key) => {
       return xs.reduce(function(rv, x) {

@@ -13,14 +13,12 @@ class SeatsMaker
     public function make()
     {
 
-        // dd($this->seats);
-        return [
-            'numberOfSeats' => $this->seats->count(),
-            'available_seats' => $this->availableSeat(),
-            "seats" => $this->seats->groupBy('seat_type')->map(function ($type) {
-                return $type->groupBy('row');
-            }),
-        ];
+       return $this->seats->groupBy('seat_type')->map(function ($type) {
+            return $type->groupBy('row')
+                ->map(function ($row){
+                    return $this->getSeatsByObj($row);
+                });
+        });
     }
 
     public function availableSeat()
@@ -28,9 +26,14 @@ class SeatsMaker
         return $this->seats->where('status','avaliable')->count();
     }
 
-    public function getSeatsByObj()
+    public function getSeatsByObj($seats = null)
     {
-        $seatsArray = $this->seats->toArray();
+        $seatsObj = [];
+        
+        $seatsArray = $seats ? $seats->toArray() : $this->seats->toArray();
+
+        $role = '';
+
 
         $result = [];
 
@@ -38,9 +41,14 @@ class SeatsMaker
         {
             $key = $seat['id'];
             $result[$key] = $seat;
+
+            $role = $seat['role'];
         }
 
-        return $result;
+        $seatsObj['seats'] = $result;
+        $seatsObj['role'] = $role;
+
+        return $seatsObj;
     }
 
     public function get()

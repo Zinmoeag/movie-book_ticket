@@ -148,13 +148,14 @@ class ScheduleController extends Controller
         $scheduleSeats = new SeatsMaker($schedule->seats);
 
         $requestSeatId = request()->input('seat_id');
+        $scheduleSeats->make();
 
         $seat = Seat::find($requestSeatId);
         $bookingInfo = $seat ? $seat->bookings()->with('seats')->first() : null;
 
         return Inertia::render($this->adminRoute('Room'),[
             'schedule' => $schedule,
-            'seats' =>$scheduleSeats->get(),
+            'seats' =>$scheduleSeats->make(),
             'room' => $schedule->room->load(['cinema']),
             'movie' => $schedule->movie,
             'date' => $schedule->date,

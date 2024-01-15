@@ -5,6 +5,7 @@ import Chat from '@/Features/Chat/Chat';
 import Login from "@/Pages/Auth/Login";
 import Register from "@/Pages/Auth/Register";
 import { useState } from "react";
+import Footer from "@/Components/Footer";
 
 export default function AppLayout({children, authUser}){
 
@@ -24,23 +25,25 @@ export default function AppLayout({children, authUser}){
                             </h3>
                         </Link>
 
-                        <div className="flex gap-2">
-                            <button
-                            onClick={e => setLoginOrRegister('login')}
-                            >
-                                Login
-                            </button>
+                        {!authUser && (
+                            <div className="flex gap-2">
+                                <button
+                                onClick={e => setLoginOrRegister('login')}
+                                >
+                                    Login
+                                </button>
 
-                            <span>
-                                |
-                            </span>
+                                <span>
+                                    |
+                                </span>
 
-                            <button
-                            onClick={e => setLoginOrRegister('register')}
-                            >
-                                Register
-                            </button>
-                        </div>
+                                <button
+                                onClick={e => setLoginOrRegister('register')}
+                                >
+                                    Register
+                                </button>
+                            </div>
+                        )}
 
                     </div>
 
@@ -53,6 +56,8 @@ export default function AppLayout({children, authUser}){
                         authUser={authUser}
                         />
                     </div>
+
+                    <Footer />
 
                     <div className={`${LoginOrRegister === 'login' ? 'translate-x-0' : 'translate-x-[-100%]' } fixed top-0 left-0 right-0 bottom-0 transition-all duration-200`}>
                         <Login

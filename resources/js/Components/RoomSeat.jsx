@@ -43,6 +43,10 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
             updateSeat(data.seat)
         });
 
+        channel.getBookingChannel(schedule).listen('.book.cancle', function(data) {
+            console.log(data)
+        });
+
         channel.getAdminChannel(authUser, schedule)?.listen('.admin.book', function(data) {
             updateBookingUsers(data.booking)
         });
@@ -66,32 +70,31 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
         setIsModalShow(!isModalShow)
     }
 
+    // const e = seatsObj.seats && seatsObj.seats['normal']['A'].seats['1784'];
+
     let roomLayout = SeatLayoutGenerator(room.room_type)
-
-    console.log(filterByTypeAndRow(seatsObj.seats))
-
-    console.log(seats)
+    // console.log(e)
 
     return (
-        <>
+        
             <div className="flex flex-col items-center gap-4">
-                {Object.entries(filterByTypeAndRow(seatsObj.seats)).map(([key, value]) => (
+                {Object.entries(seatsObj.seats).map(([key, value]) => (
                     //normal || couple
-                    <div className="flex flex-col items-center gap-4">
+                    <div className="flex flex-col items-center gap-4" key={key}>
 
                         {Object.entries(value).map(([row, seats], i) => {
                             //row of each type
                             return (
                             <ul className='flex' key={row}>
-                                <span className={roleColorGenerator(seats[0].role) + ' font-bold px-4 text-green-400'}>{row}</span>
+                                <span className={roleColorGenerator(seats.role) + ' font-bold px-4 text-green-400'}>{row}</span>
                                 <li>
                                     <SeatZone
-                                        rowLayout = {roomLayout[key]?.layout[row] || []}
-                                        seatRow = {seats}
+                                        rowLayout = {roomLayout[key].layout[row]}
+                                        seatRow = {seats.seats}
                                         modalTogle = {handleModal}
                                     />
                                 </li>
-                                <span  className={roleColorGenerator(seats[0].role) + ' font-bold px-4 text-green-400'}>{row}</span>
+                                <span  className={roleColorGenerator(seats.role) + ' font-bold px-4 text-green-400'}>{row}</span>
                             </ul>
                         )})}
                     </div>
@@ -112,7 +115,7 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
 
 
             </div>
-        </>
+
     )
 }
 

@@ -14,20 +14,19 @@ const SeatZone = ({seatRow, rowLayout, modalTogle}) => {
                 {rowLayout.map((value,i) => {
 
                     return (
-                        <ul className="group flex gap-2" key={i}>
+                        <ul className="group flex gap-2">
                             {[...Array(value).keys()].map((seat,i) => {
-
                                 IndexOfSeat++;
                                 return (
-                                    <SeatBtn
-                                    modalTogle={modalTogle}
-                                    key={seat.id}
-                                    selected
-                                    seat = {seatRow[IndexOfSeat]}
-                                    />
+                                    <div key={seat.id}>
+                                        <SeatBtn
+                                        modalTogle={modalTogle}
+                                        key={seat.id}
+                                        selected
+                                        seat = {Object.values(seatRow)[IndexOfSeat]}
+                                        />
+                                    </div>
                                 )
-                            
-                                
                             })}
                         </ul>
                     )

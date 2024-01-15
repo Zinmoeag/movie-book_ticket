@@ -90,19 +90,21 @@ const useBookingState = () => {
 
         post(uri, {
             preserveScroll: true,
-            onSuccess: page => {
+            onSuccess: page => {  
                 //reset Data
                 reset();
+                alert("booking Success")
             },
         });
     }
 
-    // console.log(bookingInfo)
+    const bookingApprove = () => {
+        
+    }
 
     const showBookingInfo = (id, user) => {
 
         if(user){
-
            let bookingInfo = bookingUsers.filter(user => {
 
                 let isture = false;

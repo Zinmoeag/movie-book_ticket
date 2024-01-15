@@ -13,13 +13,16 @@ use App\Models\Room;
 use Inertia\Inertia;
 use App\Utilities\Bookingdata;
 use App\Utilities\BookingHandling;
+use App\Utilities\SeatsMaker;
 use App\Events\BookEvent;
 use App\Events\AdminBookingEvent;
+use App\Events\CancleBookingEvent;
 
 class BookingController extends Controller
 {
 
     private $bookingHandling;
+    private $seatMaker;
 
     public function __construct()
     {
@@ -34,8 +37,8 @@ class BookingController extends Controller
 
         $booking = $this->bookingHandling->storeRecord($validated, $schedule, $seatId, 1);
         
-        $seats  = Seat::updateStatus($seatId, 1);
-
+        $seats  = Seat::updateStatus($seatId, 1); 
+    
         event(new BookEvent(
             $seats->get()->toArray(), 
             $schedule->slug
@@ -96,10 +99,17 @@ class BookingController extends Controller
             return $seat->id;
         });
 
+        
         Seat::updateStatus($seatIds,3);
-
+        
         $booking->seats()->detach();
-        $booking->delete(); 
+        $booking->delete();
+        
+        event(new BookEvent(
+            Seat::whereIn('id', $seatIds)->get()->toArray(),
+            $booking->schedule->slug)
+        );
+
 
         return to_route('admin.booking');
     }

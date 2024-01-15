@@ -24,6 +24,12 @@ const Booking = ({booking, room}) => {
 
     }
 
+    const handleBookingApprove = (e) => {
+        e.preventDefault();
+
+        
+    }
+
     return (
         <>
         <div>
@@ -96,6 +102,7 @@ const Booking = ({booking, room}) => {
                                             <div className="flex gap-2">
                                                 {booking.status === "booked" ? (
                                                     <button
+                                                    onClick={handleBookingApprove}
                                                     className="rounded-full  my-6 px-4 py-2 bg-yellow-400"
                                                     >
                                                         Approve This Booking

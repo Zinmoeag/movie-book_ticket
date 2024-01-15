@@ -17,17 +17,15 @@ const ScheduleRoom = ({seats, schedule, room, movie, date, price}) => {
         }
     } = usePage()
 
-    // console.log(user)
-
-    const roleColorGenerator = (role) => {
-        if(role === 'front'){
-            return 'bg-red-400'
-        }else if(role === 'mid'){
-            return 'bg-green-600'
-        }else if(role === 'back'){
-            return 'bg-blue-400'
-        }else if(role === 'couple'){
-            return 'bg-yellow-400'
+    function roleColorGenerator(role) {
+        if (role === 'front') {
+            return 'bg-red-400';
+        } else if (role === 'mid') {
+            return 'bg-green-600';
+        } else if (role === 'back') {
+            return 'bg-blue-400';
+        } else if (role === 'couple') {
+            return 'bg-yellow-400';
         }
     }
 

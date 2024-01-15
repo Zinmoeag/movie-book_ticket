@@ -62,8 +62,6 @@ class MovieController extends Controller
 
         $schedule = Schedule::latest()->getSchedule(request(['date','time','roomId']))->first();
 
-
-        
         try {
             if($schedule){
                 $movieSeat = new SeatsMaker($schedule->seats);
@@ -77,7 +75,7 @@ class MovieController extends Controller
                     "room" => $schedule->room->load('cinema'),
                     'schedule' => $schedule->slug,
                     "scheduleSeat" => $movieSeat->make(),
-                    'seats' => $schedule->seats,
+                    'seats' => $movieSeat->make(),
                     'price' => Price::all(),
                 ]);
             }

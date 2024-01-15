@@ -1,12 +1,13 @@
 import AppLayout from '../Layouts/AppLayout'
 import '../../css/ticket.css'
 import FilterDropDown from '@/Components/FilterDropDown';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import Map from '@/Features/Map/Map';
-import { popup } from 'leaflet';
+
 
 export default function Book ({showEvents, showDates, currentDate, movie}){
 
+    const {props : {auth}} = usePage()
 
     const getCinemaMarker = (events) => {
        let arr = Array.from(events, (item) => (
@@ -86,7 +87,9 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
 
     return (
         <>
-            <AppLayout>
+            <AppLayout
+            authUser={auth.user}
+            >
                 <section className='py-10 w-[80%] mx-auto'>
 
                     <div>

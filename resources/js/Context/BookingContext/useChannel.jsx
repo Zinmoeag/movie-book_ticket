@@ -4,6 +4,7 @@ const useChannel = () => {
         return window.Echo.channel(`booking.${schedule}`);
     }
 
+
     const getAdminChannel = (user, schedule) => {
         if(user?.role === 'admin'){
             return window.Echo.private(`adminBooking.${schedule}`);
