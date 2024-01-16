@@ -9,7 +9,8 @@ const BookFormInput = ({label, name, placeholder, onChange, value, error}) => {
                         {label}
                     </label>
 
-                    <input 
+                    <input
+                    autoComplete='off'
                     type="text"
                     onChange={onChange}
                     value={value}

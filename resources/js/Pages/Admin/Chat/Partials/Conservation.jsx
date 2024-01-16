@@ -6,8 +6,6 @@ import { usePage } from "@inertiajs/react";
 import '../../../../../css/scroll.css'
 
 const Conservation = ({receiver, conservationData}) => {
-
-
     const {
         conservation,
         addMessage,
@@ -28,10 +26,6 @@ const Conservation = ({receiver, conservationData}) => {
             addMessage(data.message.message_id,{...data.message})
         })
     },[adminChatChannel])
-
-    console.log(Object.keys(conservation).length)
-
-
 
     useEffect(() => {
         initializeConservation(conservationData)

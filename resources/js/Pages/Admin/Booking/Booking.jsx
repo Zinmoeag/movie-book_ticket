@@ -7,7 +7,11 @@ import SeatLayoutGenerator from "@/Utilities/SeatLayoutGenerator";
 
 const Booking = ({booking, room}) => {
     const {data, setData, visit} = useForm()
-    const {destroyBooking} = useAdminBooking()
+
+    const {
+        destroyBooking,
+        approveBooking
+    } = useAdminBooking()
 
     let roomLayout = SeatLayoutGenerator(booking?.schedule.room.room_type);
 
@@ -21,13 +25,12 @@ const Booking = ({booking, room}) => {
         e.preventDefault();
 
         destroyBooking(route('admin.booking.destroy', {booking: booking.id}))
-
     }
 
     const handleBookingApprove = (e) => {
         e.preventDefault();
 
-        
+        approveBooking(route('admin.booking.approve', {booking: booking.id}))
     }
 
     return (
@@ -108,7 +111,7 @@ const Booking = ({booking, room}) => {
                                                         Approve This Booking
                                                     </button>
                                                 ) : (
-                                                    <p>
+                                                    <p className="my-6 px-4 py-2 text-yellow-400">
                                                         This Booking is already confirmed
                                                     </p>
                                                 )

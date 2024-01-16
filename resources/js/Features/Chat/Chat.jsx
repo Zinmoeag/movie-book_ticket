@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import { usePage } from '@inertiajs/react';
 import { useChat } from '@/Context/Chat/ChatContext';
 import '../../../css/scroll.css'
 import Conservation from './Partials/Conservation';
@@ -15,8 +14,6 @@ const Chat = ({authUser}) => {
         conservation,
         addMessage,
     } = useChat()
-
-    console.log(conservation)
 
     const [isOpen , setIsOpen] = useState(false);
 

@@ -18,13 +18,14 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
         initialLizeSeats,
     } = useSeat();
 
+    console.log(seatsObj.seats)
+
     const {
         adminPage,
         initialLizeBookingUser,
         initializePage,
         updateBookingUsers,
         bookingInfo,
-        channel
     } = useBooking()
 
     const [isModalShow, setIsModalShow] = useState(false)
@@ -38,20 +39,19 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
     },[])
 
     //channel handling
+    const adminChannel = window.Echo.private(`adminBooking.${schedule}`);
+    const channel = window.Echo.channel(`booking.${schedule}`);
+
     useEffect(() => {
-        channel.getBookingChannel(schedule).listen('.book', function(data) {
+        channel.listen('.book', function(data) {
             updateSeat(data.seat)
         });
 
-        channel.getBookingChannel(schedule).listen('.book.cancle', function(data) {
-            console.log(data)
-        });
-
-        channel.getAdminChannel(authUser, schedule)?.listen('.admin.book', function(data) {
+        adminChannel?.listen('.admin.book', function(data) {
             updateBookingUsers(data.booking)
         });
 
-    }, [channel])
+    }, [channel, adminChannel])
 
     const roleColorGenerator = (role) => {
         if(role === 'front'){
@@ -70,19 +70,17 @@ const RoomSeat = ({ seats, room, schedule, authUser, book_seat, isAdminPage }) =
         setIsModalShow(!isModalShow)
     }
 
-    // const e = seatsObj.seats && seatsObj.seats['normal']['A'].seats['1784'];
-
-    let roomLayout = SeatLayoutGenerator(room.room_type)
-    // console.log(e)
+    let roomLayout = SeatLayoutGenerator(room.room_type);
 
     return (
         
             <div className="flex flex-col items-center gap-4">
-                {Object.entries(seatsObj.seats).map(([key, value]) => (
+                {Object.entries(seatsObj?.seats).map(([key, value]) => (
                     //normal || couple
                     <div className="flex flex-col items-center gap-4" key={key}>
 
                         {Object.entries(value).map(([row, seats], i) => {
+                            console.log(`normal - ${key}`, `row - ${row}`)
                             //row of each type
                             return (
                             <ul className='flex' key={row}>

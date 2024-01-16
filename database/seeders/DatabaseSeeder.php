@@ -22,15 +22,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         
-        \App\Models\Cinema::factory(10)->create();
+        // \App\Models\Cinema::factory(10)->create();
         
-        \App\Models\Movie::factory(10)->create();
+        // \App\Models\Movie::factory(10)->create();
   
-        \App\Models\Schedule::factory(2)->create();
+        // \App\Models\Schedule::factory(2)->create();
         
         $this->call([
             // ScheduleSeeder::class,
-            DateSeeder::class,
+            // DateSeeder::class,
             PriceSeeder::class
         ]);
     }

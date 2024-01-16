@@ -24,9 +24,8 @@ const useBookingState = () => {
       )
   }
 
-  const getAddedBookedSeats = (seats) => {
-    let obj = seatsObj.seats;
-    
+  const getAddedBookedSeats = (obj,seats) => {
+
     seats.forEach(seat => {
       let typeVar = obj[seat.seat_type] || null;
       let rowVar  = typeVar ? typeVar[seat.row].seats : null;
@@ -53,24 +52,16 @@ const useBookingState = () => {
   }
 
   const updateSeat = (newSeats) => {
-      let modifiedData = getAddedBookedSeats(newSeats)
-      
+      // let modifiedData = getAddedBookedSeats(obj, newSeats)
+
         setSeatsObj(prev => {
             return {
                 ...prev,
-                seats : modifiedData,
+                seats :getAddedBookedSeats(prev.seats, newSeats),
             }
         })
   }
 
-  const cancleBooking = (seatIds) => {
-    let modifiedData = seatsObj.seats;
-
-    // seatIds.forEach(id => )
-  }
-
-
-  // const idi = [121, 123]
 
   const groupBy = (xs, key) => {
       return xs.reduce(function(rv, x) {

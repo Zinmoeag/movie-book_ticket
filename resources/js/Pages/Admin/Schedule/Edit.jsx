@@ -18,17 +18,29 @@ const Edit = ({ schedule, movies, cinemas }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        put(route('admin.schedule.update.date', {slug : schedule.slug}));
+        put(route('admin.schedule.update.date', {slug : schedule.slug}),{
+            onSuccess : () => {
+                alert('successfully Update Date')
+            }
+        });
     }
 
     const handleMovieSubmit = (e) => {
         e.preventDefault();
-        put(route('admin.schedule.update.movie', {slug : schedule.slug}));
+        put(route('admin.schedule.update.movie', {slug : schedule.slug}),{
+            onSuccess : () => {
+                alert('successfully Change Movie')
+            }
+        });
     }
 
     const handleRoomSubmit = (e) => {
         e.preventDefault();
-        put(route('admin.schedule.update.room', {slug : schedule.slug}));
+        put(route('admin.schedule.update.room', {slug : schedule.slug}),{
+            onSuccess : () => {
+                alert('successfully change Room')
+            }
+        });
 
     }
 

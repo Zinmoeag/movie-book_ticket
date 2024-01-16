@@ -37,11 +37,16 @@ class ScheduleController extends Controller
     public function schedule(Movie $movie)
     {
         
-        $showDateString = request()->input('time');
+        $time = request()->input('time');
 
-        if($showDateString)
+        if($time)
         {
-            $schedule = $this->schedule->getScheduleByDate($showDateString);
+            $schedule = Schedule::where(function($query) use($movie, $time){
+                $query->where('movie_id', $movie->id)
+                    ->whereHas('date', function($query) use($time){
+                        $query->where('date', $time);
+                    });
+            })->with(['date','room' => fn($query) => $query->with(['cinema'])])->get();
 
             // dd($schedule);
             $events  = new MovieRooms($schedule);
@@ -51,7 +56,7 @@ class ScheduleController extends Controller
             }
 
             return Inertia::render('Book',[
-                'currentDate' => $showDateString,
+                'currentDate' => $time,
                 'showDates' => $dates,
                 'movie' => $movie,
                 'showEvents' => $events->get(),

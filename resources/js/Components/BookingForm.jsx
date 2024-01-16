@@ -101,7 +101,8 @@ const BookingForm = ({action, adminPage}) => {
 
             </div>
 
-            <div className='w-full py-2'>
+            <div className='w-full'>
+                <h1 className='text-yellow-400 text-lg mb-4'>Selected Seats</h1>
                 <ul className='flex flex-wrap gap-4'>
                     {(data.seat.length > 0) ? data.seat.map(seat => (
                         <li key={seat.id } className='flex justify-between bg-slate-700 rounded-lg overflow-hidden'>

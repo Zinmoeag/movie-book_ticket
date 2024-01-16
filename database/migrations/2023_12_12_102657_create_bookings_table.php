@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_name');
             $table->string('user_phone');
-            $table->string('user_email')->unique();
+            $table->string('user_email');
             $table->foreignId('schedule_id')->unsigned();
             $table->enum('status', ['booked', 'bought'])->default('booked');
             $table->integer('price');

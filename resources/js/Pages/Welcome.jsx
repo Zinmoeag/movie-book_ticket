@@ -2,8 +2,7 @@ import { Link, Head } from '@inertiajs/react';
 import Card from '../Components/Card'
 import {useRef, useEffect, useState} from 'react'
 import AppLayout from '../Layouts/AppLayout'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faXTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 
 
 
@@ -42,7 +41,6 @@ export default function Welcome({ auth, movies }) {
             setTimeout(() => {
               setScrollInProgress(false);
             }, 1000); 
-    
         }  
 
     }

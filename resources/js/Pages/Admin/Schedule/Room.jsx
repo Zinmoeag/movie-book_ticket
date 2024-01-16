@@ -49,7 +49,7 @@ const Room = ({ book_seat, seats, room, schedule, movie, date, available_seat })
                                     />
                                 </div>
 
-                                <div className="bg-red-800 py-8 px-4 mt-[8rem] rounded-xl">
+                                <div className="bg-red-800 py-8 px-4 mx-20 mt-[8rem] rounded-xl">
                                     <BookingForm
                                     movieInfo = {{
                                         name : movie.name,

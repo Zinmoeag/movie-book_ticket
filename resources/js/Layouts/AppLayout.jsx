@@ -59,14 +59,14 @@ export default function AppLayout({children, authUser}){
 
                     <Footer />
 
-                    <div className={`${LoginOrRegister === 'login' ? 'translate-x-0' : 'translate-x-[-100%]' } fixed top-0 left-0 right-0 bottom-0 transition-all duration-200`}>
+                    <div className={`${LoginOrRegister === 'login' ? 'translate-x-0' : 'translate-x-[-200%]' } fixed top-0 left-0 right-0 bottom-0 transition-all duration-200`}>
                         <Login
                         setIsClose = {e => setLoginOrRegister(null)}
                         canRegister = {true}
                         />
                     </div>
 
-                    <div className={`${LoginOrRegister === 'register' ? 'translate-x-0' : 'translate-x-[-100%]' } fixed top-0 left-0 right-0 bottom-0 transition-all duration-200`}>
+                    <div className={`${LoginOrRegister === 'register' ? 'translate-x-0' : 'translate-x-[-200%]' } fixed top-0 left-0 right-0 bottom-0 transition-all duration-200`}>
                         <Register
                         setIsClose = {e => setLoginOrRegister(null)} 
                         />

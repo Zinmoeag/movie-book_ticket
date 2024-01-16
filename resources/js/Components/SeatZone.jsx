@@ -12,7 +12,6 @@ const SeatZone = ({seatRow, rowLayout, modalTogle}) => {
         <>
             <div className="seat_area flex gap-12">
                 {rowLayout.map((value,i) => {
-
                     return (
                         <ul className="group flex gap-2">
                             {[...Array(value).keys()].map((seat,i) => {

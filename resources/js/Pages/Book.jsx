@@ -84,6 +84,23 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
 
     const cinemaMarkers = getCinemaMarker(data);
 
+    console.log(data)
+
+    function convertTo12HourFormat(time24) {
+
+        const parts = time24.split(':');
+        const hours = parseInt(parts[0], 10);
+        const minutes = parts[1];
+      
+        const period = hours >= 12 ? 'PM' : 'AM';
+      
+        const hours12 = hours % 12 || 12;
+      
+        const time12 = `${hours12}:${minutes} ${period}`;
+      
+        return time12;
+      }
+
 
     return (
         <>
@@ -159,8 +176,9 @@ export default function Book ({showEvents, showDates, currentDate, movie}){
 
                                                 <div key={event.id} className='bg-blue-500 px-4 py-2'>
                                                     <Link href={route('book.seats',{slug : movie.slug})} data={{time:event.time, date:currentDate, roomId : event.room_id}}>
-                                                        <p className=''>{event.time}</p>
+                                                        <p className=''>{convertTo12HourFormat(event.time)}</p>
                                                     </Link>
+                                                    <p className='text-[0.5rem]'>cinema-{event.room_number}</p>
                                                 </div>
                                             ))}
                                             

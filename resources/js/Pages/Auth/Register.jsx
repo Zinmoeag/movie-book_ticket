@@ -15,7 +15,7 @@ const Register = ({form}) => {
 
     return (
         <div className='bg-white px-6 py-8 rounded-lg w-[30rem]'>
-            <h3 className='uppercase text-[3rem] text-slate-950 pb-4'>Login</h3>
+            <h3 className='uppercase text-[3rem] text-slate-950 pb-4'>Register</h3>
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />

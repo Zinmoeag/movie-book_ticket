@@ -55,4 +55,5 @@ class SeatsMaker
     {
         return $this->seats;
     }
+
 }

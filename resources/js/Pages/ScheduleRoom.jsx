@@ -39,12 +39,14 @@ const ScheduleRoom = ({seats, schedule, room, movie, date, price}) => {
                             <div className='px-16 py-4'>
                                 <div className='flex items-center justify-between py-4 px-4 text-lg bg-gradient-to-r from-rose-600 to-amber-400 my-8'>
 
-                                    <div>
-                                        <h3 className='text-2xl uppercase font-bold'>{movie.movie}</h3>
-                                        <p className='text-red-950 text-sm'>
-                                            {room.cinema.cinema_name} |
-                                            <span className='text-blue-300'> Cinema - {room.room_number}</span>
-                                        </p>
+                                    <div className='flex'>
+                                        <div>
+                                            <h3 className='text-2xl uppercase font-bold'>{movie.movie}</h3>
+                                            <p className='text-red-950 text-sm'>
+                                                {room.cinema.cinema_name} |
+                                                <span className='text-blue-300'> Cinema - {room.room_number}</span>
+                                            </p>
+                                        </div>
                                     </div>
 
                                         <div className='text-slate-800'>

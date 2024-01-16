@@ -110,8 +110,27 @@ class BookingController extends Controller
             $booking->schedule->slug)
         );
 
-
         return to_route('admin.booking');
+    }
+
+
+    public function approve(Booking $booking)
+    {
+        $seatIds = $booking->seats->map(function($seat){
+            if($seat->status != 'booked') return null;
+            return $seat->id;
+        });
+
+        if(!$seatIds) return abort();
+
+        Seat::updateStatus($seatIds,2);
+        $booking->update(['status' => 'bought']);
+        
+        event(new BookEvent(
+            Seat::whereIn('id', $seatIds)->get()->toArray(),
+            $booking->schedule->slug)
+        );
+
     }
 
 

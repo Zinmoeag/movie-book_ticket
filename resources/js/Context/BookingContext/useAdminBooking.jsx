@@ -4,8 +4,7 @@ import { useForm } from "@inertiajs/react";
 const useAdminBooking = () => {
 
     const {
-        data,
-        setData,
+        post,
         delete: destroy
     } = useForm()
 
@@ -18,7 +17,19 @@ const useAdminBooking = () => {
     }
 
     const destroyBooking = (url) => {
-        destroy(url)
+        destroy(url, {
+            onSuccess : () => {
+                alert('Successfully Cancle')
+            }
+        })
+    }
+
+    const approveBooking = (url) => {
+        post(url, {
+            onSuccess : () => {
+                alert('Successfully Approve This Booking')
+            }
+        })
     }
 
     
@@ -27,6 +38,7 @@ const useAdminBooking = () => {
         adminPage, 
         initializePage,
         destroyBooking,
+        approveBooking,
     }
 }
 

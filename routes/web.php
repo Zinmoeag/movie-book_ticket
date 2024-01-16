@@ -33,16 +33,11 @@ Route::post('/book/{schedule:slug}', [BookingController::class, 'book'])->name("
 
 Route::get('book/confirmation/{booking}', [BookingController::class, "confirmation"])->name('book.confirm');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::prefix('chat')->group(function (){
+    Route::get('/{user}',[ChatController::class, 'showUserChat'])->name('chat.user.show');
+    Route::post('/admin/{sender}', [ChatController::class, 'userSend']);
 });
-
 
 Route::middleware('admin', 'auth')->group(function () {
     Route::get('/admin',[AdminController::class, 'index'])->name('admin');
@@ -68,15 +63,13 @@ Route::middleware('admin', 'auth')->group(function () {
     
     Route::get('/admin/booking',[BookingController::class, 'adminIndex'])->name('admin.booking');
     Route::delete('/admin/booking/delete/{booking}',[BookingController::class, 'destroy'])->name('admin.booking.destroy');
+    Route::post('/admin/booking/approve/{booking}',[BookingController::class, 'approve'])->name('admin.booking.approve');
     
     Route::get('/admin/chat', [ChatController::class, 'chatUser'])->name('admin.chat');
     Route::get('/admin/chat/{user}', [ChatController::class, 'chatUser'])->name('admin.chat.user');
-    Route::get('/chat/{user}',[ChatController::class, 'showUserChat'])->name('chat.user.show');
     Route::post('/admin/chat/{user}', [ChatController::class, 'adminSend']);
     
     Route::post('/buy/{schedule:slug}', [BookingController::class, 'buy'])->name("buy.post");
-    
-    Route::post('/chat/admin/{sender}', [ChatController::class, 'userSend']);
 });
 
 

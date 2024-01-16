@@ -82,9 +82,6 @@ class ScheduleMaker
         }
     }
 
-
-
-
     public function createScheduleSeat($movieId, $dateId, $roomIds)
     {
         $rooms = Room::whereIn('id' , $roomIds)->get()->toArray();
